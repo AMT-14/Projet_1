@@ -1,5 +1,5 @@
-package Presentation;
-import Model.*;
+package presentation;
+import model.*;
 
 
 import javax.servlet.ServletException;

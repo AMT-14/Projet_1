@@ -1,6 +1,6 @@
-package Presentation;
+package presentation;
 
-import Model.HomePage;
+import model.HomePage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

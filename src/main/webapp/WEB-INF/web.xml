@@ -6,7 +6,7 @@
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>QuestionReadServlet</servlet-name>
-        <servlet-class>Presentation.QuestionReadServlet</servlet-class>
+        <servlet-class>presentation.QuestionReadServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>QuestionReadServlet</servlet-name>
@@ -15,7 +15,7 @@
     
     <servlet>
         <servlet-name>HomePageServlet</servlet-name>
-        <servlet-class>Presentation.HomePageServlet</servlet-class>
+        <servlet-class>presentation.HomePageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePageServlet</servlet-name>
