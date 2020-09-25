@@ -16,7 +16,7 @@ public class QuestionReadServlet extends HttpServlet {
         User user = new User(3, "Pascal Delanonymat");
         Question question = new Question (user, "Sur les starting blocks?");
         request.setAttribute("question", question);
-        request.getRequestDispatcher("/WEB-INF/pages/questionReadView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/questionReadView.jsp").forward(request, response);
 
     }
 }

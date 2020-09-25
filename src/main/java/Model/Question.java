@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Question {
     private User author;
     private String body;
