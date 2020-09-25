@@ -11,6 +11,7 @@
    * list of pages (clickable)
    * categories/popular content
    * login/register button (clickable)
+   *  * register button will display a registration form page to get the inputs  
    * global statistics (number of questions, replies etc)
    * conditions of utilisation (clickable)
    * rules (clickable)
