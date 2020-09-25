@@ -23,6 +23,4 @@ public class HomePage {
         this.statistics = statistics;
         this.isConnected = isConnected;
     }
-
 }
-
