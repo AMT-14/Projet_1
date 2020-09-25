@@ -2,11 +2,11 @@ package Model;
 
 public class Question {
     private User author;
-    private String question;
+    private String body;
 
     public Question(User author, String question) {
         this.author = author;
-        this.question = question;
+        this.body = question;
     }
 
 
@@ -19,10 +19,10 @@ public class Question {
     }
 
     public String getQuestion() {
-        return question;
+        return body;
     }
 
     public void setQuestion(String question) {
-        this.question = question;
+        this.body = question;
     }
 }
