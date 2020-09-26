@@ -1,5 +1,6 @@
 package presentation;
 import model.*;
+import java.util.Date;
 
 
 import javax.servlet.ServletException;
@@ -12,9 +13,9 @@ public class QuestionReadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO faire en sorte que la question soit passée en paramètre?
         // TODO ajout des réponses
-
+        Date date = new Date();
         User user = new User(3, "Pascal Delanonymat");
-        Question question = new Question (user, "Sur les starting blocks?");
+        Question question = new Question (user, "Sur les starting blocks?", date);
         request.setAttribute("question", question);
         request.getRequestDispatcher("/WEB-INF/views/questionReadView.jsp").forward(request, response);
 

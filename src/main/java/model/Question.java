@@ -1,17 +1,11 @@
 package model;
 
-import lombok.Getter;
-import lombok.Setter;
 
+import java.util.Date;
 
-@Setter
-@Getter
-//@AllArgsConstructor
-public class Question {
-    private User author;
-    private String body;
-    public Question(User author, String body) {
-        this.author = author;
-        this.body = body;
+public class Question extends Post{
+
+    public Question(User author, String body, Date date) {
+        super(author, body, date);
     }
 }
