@@ -1,5 +1,5 @@
 // from the webcast
-package Presentation;
+package ch.heigvd.amt.Presentation;
 
 import javax.imageio.spi.ServiceRegistry;
 import javax.inject.Inject;

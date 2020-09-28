@@ -1,4 +1,4 @@
-package model;
+package ch.heigvd.amt.model;
 
 import java.util.Date;
 import java.util.List;

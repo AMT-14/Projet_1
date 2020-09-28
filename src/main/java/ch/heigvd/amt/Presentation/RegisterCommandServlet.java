@@ -1,6 +1,4 @@
-package Presentation;
-
-import Model.User;
+package ch.heigvd.amt.Presentation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
