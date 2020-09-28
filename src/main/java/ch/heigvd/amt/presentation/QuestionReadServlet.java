@@ -1,5 +1,5 @@
-package presentation;
-import model.*;
+package ch.heigvd.amt.presentation;
+import ch.heigvd.amt.model.*;
 import java.util.Date;
 
 

@@ -1,4 +1,4 @@
-package model;
+package ch.heigvd.amt.model;
 
 import lombok.Getter;
 import lombok.Setter;

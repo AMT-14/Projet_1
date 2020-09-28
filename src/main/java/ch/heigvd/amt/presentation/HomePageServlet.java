@@ -1,6 +1,6 @@
-package presentation;
+package ch.heigvd.amt.presentation;
 
-import model.HomePage;
+import ch.heigvd.amt.model.HomePage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
