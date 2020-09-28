@@ -1,9 +1,8 @@
-package Model;
+package model;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Value;
 
 import java.util.ArrayList;
 
@@ -23,6 +22,4 @@ public class HomePage {
         this.statistics = statistics;
         this.isConnected = isConnected;
     }
-
 }
-
