@@ -19,6 +19,6 @@ public class HomePageServlet extends javax.servlet.http.HttpServlet {
         HomePage p = new HomePage(true, "Hello World ", "No rules here cowboy, it's the Far West", temp);
 
         request.setAttribute("statistics", temp);
-        request.getRequestDispatcher("/WEB-INF/views/homePageView.jsp").forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/views/homePageView.jsp.jsp").forward(request,response);
     }
 }

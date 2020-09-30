@@ -1,6 +1,9 @@
 // from the webcast
 package ch.heigvd.amt.Presentation;
 
+import ch.heigvd.amt.command.LoginCommand;
+import ch.heigvd.amt.command.LoginFailedException;
+
 import javax.imageio.spi.ServiceRegistry;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "LoginCommandServlet", urlPatterns = "/login/do")
 public class LoginCommandServlet extends HttpServlet {
@@ -23,7 +27,7 @@ public class LoginCommandServlet extends HttpServlet {
                 .password(request.getParameter("password"))
                 .build();
 
-        Object loggedInUser = null; // should be PersonDTO at some point (cf webcast)
+        PersonDTD loggedInUser = null; // should be PersonDTO at some point (cf webcast)
 
         try{
             loggedInUser = serviceRegistry.getIdentityFacade().login(command);
