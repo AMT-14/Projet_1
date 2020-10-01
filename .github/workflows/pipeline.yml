@@ -36,8 +36,5 @@ jobs:
 
     - name: Build Dockerimage (includes mvn clean package)
       run:
-	 echo ${{ secrets.OPPENAFFECT_PAT }} | docker login ghcr.io -u dev-openaffect --password-stdin
-	 docker build -t open-affect/flow
-	 ./build-image.sh
-	 docker tag open-affect/flow ghcr.io/openaffect/flow
-	 docker push ghcr.io/openaffect/flow
+	 echo ${{ secrets.AMT_14_TEAM_ACCESS_TOKEN }} | docker login ghcr.io -u dev-openaffect --password-stdin
+	 ./build.sh
