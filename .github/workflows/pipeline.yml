@@ -36,5 +36,5 @@ jobs:
 
     - name: Build Dockerimage (includes mvn clean package)
       run: |
-         echo ${{ secrets.AMT_14_TEAM_ACCESS_TOKEN }} | docker login ghcr.io -u dev-openaffect --password-stdin
-        ./build.sh
+       echo ${{ secrets.AMT_14_TEAM_ACCESS_TOKEN }} | docker login ghcr.io -u dev-openaffect --password-stdin
+       ./build.sh
