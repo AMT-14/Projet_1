@@ -5,20 +5,20 @@
          version="3.1">
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
-        <servlet-name>QuestionReadServlet</servlet-name>
-        <servlet-class>ch.heigvd.amt.application.question.QuestionReadServlet</servlet-class>
+        <servlet-name>QuestionsPageHandler</servlet-name>
+        <servlet-class>ch.heigvd.amt.ui.web.question.QuestionsQueryEndpoint</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>QuestionReadServlet</servlet-name>
-        <url-pattern>/questionread</url-pattern>
+        <servlet-name>QuestionsPageHandler</servlet-name>
+        <url-pattern>/questions</url-pattern>
     </servlet-mapping>
-    
     <servlet>
-        <servlet-name>HomePageServlet</servlet-name>
-        <servlet-class>ch.heigvd.amt.application.page.HomePageServlet</servlet-class>
+        <servlet-name>SubmitQuestionCommandHandler</servlet-name>
+        <servlet-class>ch.heigvd.amt.ui.web.question.ProposeQuestionCommandEndpoint</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>HomePageServlet</servlet-name>
-        <url-pattern>/home</url-pattern>
+        <servlet-name>SubmitQuestionCommandHandler</servlet-name>
+        <url-pattern>/submitQuestion.do</url-pattern>
     </servlet-mapping>
+
 </web-app>

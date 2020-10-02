@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name =  "SubmitQuestionCommandHandler", urlPatterns = "/submitQuestion.do")
+@WebServlet(name = "SubmitQuestionCommandHandler", urlPatterns = "/submitQuestion.do")
 public class ProposeQuestionCommandEndpoint extends HttpServlet{
 
     private ServiceRegistry serviceRegistry = ServiceRegistry.getServiceRegistry();
