@@ -2,6 +2,10 @@
 *.iml
 docker/topologies/test/war
 e2e/node_modules
+e2e/codecept.conf.js
+e2e/output
+e2e/package-lock.json
+e2e/steps.d.ts
 target/
 pom.xml.tag
 pom.xml.releaseBackup
