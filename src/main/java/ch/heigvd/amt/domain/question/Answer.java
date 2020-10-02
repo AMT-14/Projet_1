@@ -1,4 +1,6 @@
-package ch.heigvd.amt.model;
+package ch.heigvd.amt.domain.question;
+
+import ch.heigvd.amt.domain.user.User;
 
 import java.util.Date;
 
