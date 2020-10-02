@@ -1,11 +1,11 @@
-Feature('firstTest');
+Feature('My First Tests');
 
-Scenario('test github on github page', (I) => {
-    I.amOnPage('https://github.com');
-    I.see('Github');
-})
+Scenario('test something', ({ I }) => {
+  I.amOnPage('https://github.com');
+  I.see('GitHub');
+});
 
-Scenario('Login user with valid credentials', (I) => {
+Scenario('Login user with valid credentials', ({ I }) => {
     I.amOnPage('https://s2.demo.opensourcecms.com/orangehrm/symfony/web/index.php/auth/login');
     I.see('LOGIN Panel');
     I.fillField('txtUsername','opensourcecms'); //Can use the ID of an element to locate elements
@@ -15,7 +15,7 @@ Scenario('Login user with valid credentials', (I) => {
 
 });
 
-Scenario('Login user with invalid credentials ', (I) => {
+Scenario('Login user with invalid credentials ', ({ I }) => {
     I.amOnPage('https://s2.demo.opensourcecms.com/orangehrm/symfony/web/index.php/auth/login');
     I.see('LOGIN Panel');
     I.fillField('txtUsername','opensourcecms'); //Can use the ID of an element to locate elements

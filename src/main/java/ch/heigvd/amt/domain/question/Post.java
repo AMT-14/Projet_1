@@ -1,8 +1,9 @@
-package ch.heigvd.amt.model;
+package ch.heigvd.amt.domain.question;
 
 import java.util.Date;
 import java.util.List;
 
+import ch.heigvd.amt.domain.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
