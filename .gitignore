@@ -1,6 +1,6 @@
 .idea/
 *.iml
-*.war
+docker/topologies/test/war
 e2e/node_modules
 target/
 pom.xml.tag
