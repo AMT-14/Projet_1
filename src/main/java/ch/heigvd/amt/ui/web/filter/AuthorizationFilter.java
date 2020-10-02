@@ -1,6 +1,7 @@
 package ch.heigvd.amt.ui.web.filter;
 
 
+import ch.heigvd.amt.application.identitymng.authenticate.CurrentUserDTO;
 import ch.heigvd.amt.domain.user.User;
 
 import javax.servlet.*;
@@ -28,7 +29,7 @@ public class AuthorizationFilter implements Filter {
             return;
         }
 
-        User loggedInUser = (User) request.getSession().getAttribute("currentUser");
+        CurrentUserDTO loggedInUser = (CurrentUserDTO) request.getSession().getAttribute("currentUser");
 
         // if other ressources are not public, we need to redirect on the login page
         if (loggedInUser == null){
@@ -52,7 +53,7 @@ public class AuthorizationFilter implements Filter {
     }
 
     boolean isResourcePublic(String URI){
-        if(URI.startsWith("/login") || URI.startsWith("/logout") || URI.startsWith("/assets")){
+        if(URI.startsWith("/login") || URI.startsWith("/logout") || URI.startsWith("/assets") || URI.startsWith("/register")){
             return true;
         } else {
             return false;
