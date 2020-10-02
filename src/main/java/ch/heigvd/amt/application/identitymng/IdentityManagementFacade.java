@@ -53,4 +53,5 @@ public class IdentityManagementFacade {
 
         return currentUser;
     }
+
 }

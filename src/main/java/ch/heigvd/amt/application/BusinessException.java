@@ -1,9 +1,9 @@
 package ch.heigvd.amt.application;
 
-public class BusinessException {
-    public BusinessException(String message) throws Exception {
+public class BusinessException extends Throwable {
+    
+    public BusinessException(String message) throws Throwable {
 
-        throw new java.lang.Exception(message);
-
+        throw new java.lang.Throwable(message);
     }
 }

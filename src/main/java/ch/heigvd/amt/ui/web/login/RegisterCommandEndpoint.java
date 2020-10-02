@@ -3,6 +3,7 @@ package ch.heigvd.amt.ui.web.login;
 import ch.heigvd.amt.application.identitymng.IdentityManagementFacade;
 import ch.heigvd.amt.application.identitymng.login.RegisterCommand;
 import ch.heigvd.amt.application.identitymng.login.RegistrationFailedException;
+import ch.heigvd.amt.application.ServiceRegistry;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

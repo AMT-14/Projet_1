@@ -5,6 +5,7 @@ import ch.heigvd.amt.application.identitymng.IdentityManagementFacade;
 import ch.heigvd.amt.application.identitymng.authenticate.CurrentUserDTO;
 import ch.heigvd.amt.application.identitymng.authenticate.LoginCommand;
 import ch.heigvd.amt.application.identitymng.authenticate.LoginFailedException;
+import ch.heigvd.amt.application.ServiceRegistry;
 import ch.heigvd.amt.domain.user.User;
 
 
@@ -19,7 +20,7 @@ import java.util.List;
 @WebServlet(name = "LoginCommandServlet", urlPatterns = "/login.do")
 public class LoginCommandEndpoint extends HttpServlet {
 
-    private ServiceRegistery serviceRegistery = ServiceRegistery.getServiceRegistery();
+    private ServiceRegistry serviceRegistery = ServiceRegistry.getServiceRegistry();
     private IdentityManagementFacade identityManagementFacade = serviceRegistery.getIdentityManagementFacade();
 
     @Override
@@ -33,7 +34,7 @@ public class LoginCommandEndpoint extends HttpServlet {
                 .build();
 
         try{
-            currentUser = serviceRegistry.getIdentityFacade().login(command);
+            currentUser = ServiceRegistry.getIdentityManagementFacade().authenticate(command);
             request.getSession().setAttribute("currentUser", currentUser);
 
             // place where we keep the original target URL, with that after logged in the user can finally  be redirected to their page
