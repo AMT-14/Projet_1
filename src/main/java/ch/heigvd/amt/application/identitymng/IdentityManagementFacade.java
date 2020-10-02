@@ -35,7 +35,7 @@ public class IdentityManagementFacade {
         }
     }
 
-    public CurrentUserDTO authenticate(LoginCommand command) throws LoginFailedException{
+    public CurrentUserDTO authenticate(LoginCommand command) throws Throwable {
 
         User user = userRepository.findByUsername(command.getUsername())
                 .orElseThrow(() -> new LoginFailedException("User not found"));

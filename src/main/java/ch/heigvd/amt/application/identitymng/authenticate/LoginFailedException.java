@@ -5,5 +5,5 @@ import lombok.Value;
 
 @Value
 public class LoginFailedException extends BusinessException {
-    public LoginFailedException(String message){super(message);}
+    public LoginFailedException(String message) throws Throwable {super(message);}
 }
