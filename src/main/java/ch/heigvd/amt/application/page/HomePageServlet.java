@@ -1,7 +1,12 @@
 package ch.heigvd.amt.application.page;
 
-import ch.heigvd.amt.domain.HomePage;
 
+import ch.heigvd.amt.domain.HomePage;
+import ch.heigvd.amt.domain.question.Post;
+import ch.heigvd.amt.domain.question.Question;
+import ch.heigvd.amt.domain.user.User;
+
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +21,13 @@ public class HomePageServlet extends javax.servlet.http.HttpServlet {
         ArrayList<Integer> temp = new ArrayList<Integer>();
         temp.add(3);
         temp.add(40);
-        HomePage p = new HomePage(true, "Hello World ", "No rules here cowboy, it's the Far West", temp);
+        Date date = new Date();
+        User user = new User(4, "Olivier Liechti");
+        Post post = new Question(user, "La question elle est vite repondue", date);
+        HomePage p = new HomePage(true, "Hello World ", "No rules here cowboy, it's the Far West", temp, post);
 
-        request.setAttribute("statistics", temp);
-        request.getRequestDispatcher("/WEB-INF/views/homePageView.jsp.jsp").forward(request,response);
+        request.setAttribute("HomePage", p);
+        request.getRequestDispatcher("/WEB-INF/views/homePageView.jsp").forward(request,response);
+
     }
 }

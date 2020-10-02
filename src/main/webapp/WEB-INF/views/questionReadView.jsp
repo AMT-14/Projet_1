@@ -4,12 +4,16 @@
 <html>
 <head>
     <title>Question</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 </head>
 <body>
-<h2>Question from ${question.author}</h2>
-<ul>
-${question.body}
-</ul>
-</body>
+<jsp:include page="parts/header.jsp"/>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container bg-secondary">
+        <h1 class="display-4">Question from ${question.author.username}</h1>
+        <p class="lead">${question.body}</p>
+    </div>
+</div>
+<jsp:include page="parts/footer.jsp"/>
 </body>
 </html>
