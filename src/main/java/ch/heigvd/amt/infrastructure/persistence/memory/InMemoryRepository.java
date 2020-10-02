@@ -1,4 +1,4 @@
-package ch.heigvd.amt.infrastructure.persistance.memory;
+package ch.heigvd.amt.infrastructure.persistence.memory;
 
 import ch.heigvd.amt.domain.IEntity;
 import ch.heigvd.amt.domain.IRepository;
@@ -20,7 +20,7 @@ public abstract class InMemoryRepository<ENTITY extends IEntity<ENTITY, ID>, ID 
         store.put(entity.getId(), entity);
     }
 
-    public void remove(ID id) {store.remove(Id);}
+    public void remove(ID id) {store.remove(id);}
     public Optional<ENTITY> findById(ID id){
         ENTITY existingEntity = store.get(id);
         if(existingEntity == null){
@@ -35,5 +35,4 @@ public abstract class InMemoryRepository<ENTITY extends IEntity<ENTITY, ID>, ID 
                 .map(entity->entity.deepClone())
                 .collect(Collectors.toList());
     }
-    public abstract Optional<IEntity<IEntity, Id>> findByUsername(String username);
 }

@@ -1,4 +1,4 @@
-package ch.heigvd.amt.infrastructure.persistance.memory;
+package ch.heigvd.amt.infrastructure.persistence.memory;
 
 import ch.heigvd.amt.domain.user.IUserRepository;
 import ch.heigvd.amt.domain.user.User;
@@ -14,7 +14,7 @@ public class InMemoryUserRepository extends InMemoryRepository<User, UserId> imp
         // unique username constraint
         synchronized (entity.getUsername()){
             if (!findByUsername(entity.getUsername()).isEmpty()){
-                throw new IntegrityConstraintViolationException("Cannot save or update User. Integrity constraint violation: username already exists");
+                throw new RuntimeException("Cannot save or update User. Integrity constraint violation: username already exists");
             }
             super.save(entity);
         }
@@ -30,7 +30,7 @@ public class InMemoryUserRepository extends InMemoryRepository<User, UserId> imp
         if (matchEntities.size() < 1){return Optional.empty();}
 
         if (matchEntities.size() > 1){
-            throw new DataCorruptionException("Your data stored is corrupted");
+            throw new RuntimeException("Your data stored is corrupted");
         }
         return Optional.of(matchEntities.get(0).deepClone());
     }
