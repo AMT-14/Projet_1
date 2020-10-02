@@ -1,4 +1,4 @@
-package ch.heigvd.amt.command;
+package ch.heigvd.amt.application.identitymng.authenticate;
 
 import lombok.Builder;
 import lombok.Getter;

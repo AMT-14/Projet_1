@@ -1,4 +1,7 @@
-package ch.heigvd.amt.filter;
+package ch.heigvd.amt.ui.web.filter;
+
+
+import ch.heigvd.amt.domain.user.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -25,7 +28,7 @@ public class AuthorizationFilter implements Filter {
             return;
         }
 
-        PersonDTD loggedInUser = (PersonDTD)request.getSession().getAttribute("currentUser");
+        User loggedInUser = (User) request.getSession().getAttribute("currentUser");
 
         // if other ressources are not public, we need to redirect on the login page
         if (loggedInUser == null){
@@ -51,6 +54,8 @@ public class AuthorizationFilter implements Filter {
     boolean isResourcePublic(String URI){
         if(URI.startsWith("/login") || URI.startsWith("/logout") || URI.startsWith("/assets")){
             return true;
+        } else {
+            return false;
         }
     }
 }
