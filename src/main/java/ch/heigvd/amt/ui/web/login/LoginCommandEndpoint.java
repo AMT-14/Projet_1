@@ -1,5 +1,5 @@
 // from the webcast
-package ch.heigvd.amt.application.identitymng.authenticate;
+package ch.heigvd.amt.ui.web.login;
 
 import ch.heigvd.amt.application.identitymng.authenticate.LoginCommand;
 import ch.heigvd.amt.domain.user.User;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "LoginCommandServlet", urlPatterns = "/login/do")
-public class LoginCommandServlet extends HttpServlet {
+public class LoginCommandEndpoint extends HttpServlet {
 
     @Inject
     ServiceRegistry serviceRegistry;
@@ -22,8 +22,8 @@ public class LoginCommandServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LoginCommand command = LoginCommand.builder()
-                .email(request.getParameter("email"))
-                .password(request.getParameter("password"))
+                .username(request.getParameter("username"))
+                .clearTextPassword(request.getParameter("clearTextPassword"))
                 .build();
 
         User loggedInUser = null; // should be PersonDTO at some point (cf webcast)

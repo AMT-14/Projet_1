@@ -1,4 +1,4 @@
-package ch.heigvd.amt.application.identitymng.login;
+package ch.heigvd.amt.ui.web.login;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 
 @WebServlet(name = "RegisterCommandServlet", urlPatterns = "/register")
-public class RegisterCommandServlet extends HttpServlet {
+public class RegisterCommandEndpoint extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
