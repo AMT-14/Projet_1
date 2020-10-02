@@ -3,6 +3,7 @@ package ch.heigvd.amt.domain.question;
 
 import ch.heigvd.amt.domain.IEntity;
 import ch.heigvd.amt.domain.user.User;
+import ch.heigvd.amt.domain.user.UserId;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,13 @@ public class Question implements IEntity {
     private QuestionType questionType;
 
     public void categorizeAs(QuestionType questionType){this.questionType = questionType;}
+
+    @Override
+    public IEntity deepClone() {
+        return this.toBuilder()
+                .id(new QuestionId(id.asString()))
+                .build();
+    }
 
     public static  class  QuestionBuilder{
         public Question build(){
