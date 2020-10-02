@@ -1,7 +1,6 @@
 package ch.heigvd.amt.application.page;
 
 
-import ch.heigvd.amt.domain.HomePage;
 import ch.heigvd.amt.domain.question.Post;
 import ch.heigvd.amt.domain.question.Question;
 import ch.heigvd.amt.domain.user.User;
