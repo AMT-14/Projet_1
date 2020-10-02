@@ -1,5 +1,6 @@
-package ch.heigvd.amt.model;
+package ch.heigvd.amt.domain;
 
+import ch.heigvd.amt.domain.question.Post;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class HomePage {
     private ArrayList<Integer> statistics;
     private Post featured;
 
-    public HomePage(Boolean isConnected, String description, String rules, ArrayList<Integer> statistics, Post q){
+    public HomePage(boolean isConnected, String description, String rules, ArrayList<Integer> statistics, Post q){
         this.description = description;
         this.rules = rules;
         this.statistics = statistics;
