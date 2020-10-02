@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Home Page</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 </head>
 <body>
+<jsp:include page="parts/header.jsp"/>
 <h2>Satistics</h2>
 <ul>
     <c:forEach items="${HomePage.statistics}" var="value">
@@ -16,6 +18,6 @@
 <ul>
     ${HomePage.featured.body}
 </ul>
-
+<jsp:include page="parts/footer.jsp"/>
 </body>
 </html>
