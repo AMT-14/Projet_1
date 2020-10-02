@@ -1,48 +1,50 @@
 // from the webcast
 package ch.heigvd.amt.ui.web.login;
 
+import ch.heigvd.amt.application.identitymng.IdentityManagementFacade;
+import ch.heigvd.amt.application.identitymng.authenticate.CurrentUserDTO;
 import ch.heigvd.amt.application.identitymng.authenticate.LoginCommand;
+import ch.heigvd.amt.application.identitymng.authenticate.LoginFailedException;
 import ch.heigvd.amt.domain.user.User;
 
-import javax.imageio.spi.ServiceRegistry;
-import javax.inject.Inject;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet(name = "LoginCommandServlet", urlPatterns = "/login/do")
+@WebServlet(name = "LoginCommandServlet", urlPatterns = "/login.do")
 public class LoginCommandEndpoint extends HttpServlet {
 
-    @Inject
-    ServiceRegistry serviceRegistry;
+    private ServiceRegistery serviceRegistery = ServiceRegistery.getServiceRegistery();
+    private IdentityManagementFacade identityManagementFacade = serviceRegistery.getIdentityManagementFacade();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.getSession().removeAttribute("errors");
+        CurrentUserDTO currentUser = null;
+
         LoginCommand command = LoginCommand.builder()
                 .username(request.getParameter("username"))
-                .clearTextPassword(request.getParameter("clearTextPassword"))
+                .clearTextPassword(request.getParameter("password"))
                 .build();
 
-        User loggedInUser = null; // should be PersonDTO at some point (cf webcast)
-
         try{
-//            loggedInUser = serviceRegistry.getIdentityFacade().login(command);
-//            request.getSession().setAttribute("loggedUser", loggedInUser);
+            currentUser = serviceRegistry.getIdentityFacade().login(command);
+            request.getSession().setAttribute("currentUser", currentUser);
 
             // place where we keep the original target URL, with that after logged in the user can finally  be redirected to their page
-            String targetPageURL = (String)request.getSession().getAttribute("targetPageURL");
+            String targetPageURL = (String)request.getSession().getAttribute("targetUrl");
             targetPageURL = (targetPageURL != null) ? targetPageURL : "/questions";
             response.sendRedirect(targetPageURL);
             return;
-        } // catch (LoginFailedException e){
-        catch (IOException e) {
-            e.printStackTrace();
         }
-//            request.setAttribute("errors", List.of("Invalid Login Credentials"));
-//            request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
-//        }
+        catch (LoginFailedException e) {
+            request.setAttribute("errors", List.of("Invalid Login Credentials"));
+            response.sendRedirect("/login");
+        }
     }
 }
