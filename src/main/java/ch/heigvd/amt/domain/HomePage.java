@@ -16,13 +16,13 @@ public class HomePage {
     private String description;
     private String rules;
     private ArrayList<Integer> statistics;
-    private Post featured;
+    //private Post featured;
 
-    public HomePage(boolean isConnected, String description, String rules, ArrayList<Integer> statistics, Post q){
+    public HomePage(boolean isConnected, String description, String rules, ArrayList<Integer> statistics, /*Post q */){
         this.description = description;
         this.rules = rules;
         this.statistics = statistics;
         this.isConnected = isConnected;
-        this.featured = q;
+        //this.featured = q;
     }
 }
