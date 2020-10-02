@@ -37,7 +37,7 @@ jobs:
     - name: Build Dockerimage (includes mvn clean package)
       run: |
        echo ${{ secrets.AMT_14_TEAM_ACCESS_TOKEN }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
-       docker-compose build -t AMT-14/Test_AMT_14 ./docker/topologies/openliberty
-       docker tag AMT-14/Test_AMT_14 ghcr.io/AMT-14/Test_AMT_Team_14
+       docker build -t amt-14/test_amt_14 ./docker/images/flow/
+       docker tag amt-14/test_amt_14 ghcr.io/AMT-14/Test_AMT_Team_14
        docker push ghcr.io/AMT-14/Test_AMT_Team_14
 
