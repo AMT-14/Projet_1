@@ -5,5 +5,5 @@ import lombok.Value;
 
 @Value
 public class RegistrationFailedException extends BusinessException {
-    public RegistrationFailedException(String message) {super(message);}
+    public RegistrationFailedException(String message) throws Exception {super(message);}
 }

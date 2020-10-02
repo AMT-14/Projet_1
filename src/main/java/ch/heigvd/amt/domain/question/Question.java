@@ -28,7 +28,13 @@ public class Question implements IEntity {
 
     public void categorizeAs(QuestionType questionType){this.questionType = questionType;}
 
+    @Override
+    public IEntity deepClone() {
 
+        return this.toBuilder()
+                .id(new QuestionId(id.asString()))
+                .build();
+    }
 
     public static  class  QuestionBuilder{
         public Question build(){
@@ -54,11 +60,5 @@ public class Question implements IEntity {
 
             return new Question(id, author, text, questionType);
         }
-    }
-    @Override
-    public IEntity deepClone() {
-        return this.toBuilder()
-                .id(new QuestionId(id.asString()))
-                .build();
     }
 }

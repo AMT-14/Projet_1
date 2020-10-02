@@ -14,7 +14,7 @@ public class IdentityManagementFacade {
 
     public IdentityManagementFacade(IUserRepository userRepository){this.userRepository = userRepository;}
 
-    public void register(RegisterCommand command) throws RegistrationFailedException {
+    public void register(RegisterCommand command) throws Exception {
         User existingUserWithSameUsername = userRepository.findByUsername(command.getUsername()).orElse(null);
 
         if(existingUserWithSameUsername != null){
@@ -35,10 +35,18 @@ public class IdentityManagementFacade {
         }
     }
 
-    public CurrentUserDTO authenticate(LoginCommand command) throws Throwable {
+
+    public CurrentUserDTO authenticate(LoginCommand command) throws Exception {
 
         User user = userRepository.findByUsername(command.getUsername())
-                .orElseThrow(() -> new LoginFailedException("User not found"));
+                .orElseThrow(() -> {
+                    try {
+                        return new LoginFailedException("User not found");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                });
         boolean success = user.authenticate(command.getClearTextPassword());
         if(!success){
             throw new LoginFailedException("Authentication failed, credential missmatch");

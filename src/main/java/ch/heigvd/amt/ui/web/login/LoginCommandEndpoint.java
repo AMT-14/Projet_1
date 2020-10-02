@@ -7,6 +7,7 @@ import ch.heigvd.amt.application.identitymng.authenticate.LoginCommand;
 import ch.heigvd.amt.application.identitymng.authenticate.LoginFailedException;
 import ch.heigvd.amt.application.ServiceRegistry;
 import ch.heigvd.amt.domain.user.User;
+import lombok.SneakyThrows;
 
 
 import javax.servlet.ServletException;
@@ -23,6 +24,7 @@ public class LoginCommandEndpoint extends HttpServlet {
     private ServiceRegistry serviceRegistery = ServiceRegistry.getServiceRegistry();
     private IdentityManagementFacade identityManagementFacade = serviceRegistery.getIdentityManagementFacade();
 
+    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getSession().removeAttribute("errors");

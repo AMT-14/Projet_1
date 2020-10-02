@@ -4,6 +4,7 @@ import ch.heigvd.amt.application.identitymng.IdentityManagementFacade;
 import ch.heigvd.amt.application.identitymng.login.RegisterCommand;
 import ch.heigvd.amt.application.identitymng.login.RegistrationFailedException;
 import ch.heigvd.amt.application.ServiceRegistry;
+import lombok.SneakyThrows;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ public class RegisterCommandEndpoint extends HttpServlet {
     private ServiceRegistry serviceRegistry = ServiceRegistry.getServiceRegistry();
     private IdentityManagementFacade identityManagementFacade = serviceRegistry.getIdentityManagementFacade();
 
+    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
