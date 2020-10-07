@@ -1,4 +1,4 @@
-FROM openliberty/open-liberty:kernel-java11-openj9-ubi
+FROM openliberty/open-liberty:kernel-java11-openj11-ubi
 
 MAINTAINER Basile Botebol <basile.botebol@gmail.com>
 
