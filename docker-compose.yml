@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    expose:
+      - '3306'
+  app:
+    image: ghcr.io/amt-14/test_amt_team_14:latest
+    ports:
+      - '9080:9080'
+    links:
+      - "db:database"
