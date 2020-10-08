@@ -18,7 +18,7 @@ public class IdentityManagementFacade {
         User existingUserWithSameUsername = userRepository.findByUsername(command.getUsername()).orElse(null);
 
         if(existingUserWithSameUsername != null){
-            throw new RegistrationFailedException("Usernamed already taken");
+            throw new RegistrationFailedException("Username is already taken");
         }
         try{
             User newUser = User.builder()
@@ -49,7 +49,7 @@ public class IdentityManagementFacade {
                 });
         boolean success = user.authenticate(command.getClearTextPassword());
         if(!success){
-            throw new LoginFailedException("Authentication failed, credential missmatch");
+            throw new LoginFailedException("Authentication failed, credential miss-match");
         }
 
         CurrentUserDTO currentUser = CurrentUserDTO.builder()

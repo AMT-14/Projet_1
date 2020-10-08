@@ -21,6 +21,7 @@
     <div class="questions">
         <div class="title">Questions</div>
         <c:forEach var="question" items="${questions.questions}">
+            <div class="title">Question: </div>
             <div class="question">${question.text}</div>
         </c:forEach>
     </div>
