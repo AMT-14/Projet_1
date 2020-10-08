@@ -33,7 +33,7 @@ public class RegisterCommandEndpoint extends HttpServlet {
         // retrieve values from the form in the view
         RegisterCommand registerCommand = RegisterCommand.builder()
                 .username(request.getParameter("username"))
-                .firstName(request.getParameter("firsName"))
+                .firstName(request.getParameter("firstName"))
                 .lastName(request.getParameter("lastName"))
                 .email(request.getParameter("email"))
                 .clearTextPassword(request.getParameter("password"))
