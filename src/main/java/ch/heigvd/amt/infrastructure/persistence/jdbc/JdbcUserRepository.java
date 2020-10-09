@@ -36,13 +36,13 @@ public class JdbcUserRepository implements IUserRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO USER " +
-                    "VALUES " + entity.getId() +
-                    " " + entity.getUsername() +
-                    " " + entity.getEmail() +
-                    " " + entity.getFirstName() +
-                    " " + entity.getLastName() +
-                    " " + entity.getEncryptedPassword());
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO USER "
+                    + "VALUES (" + entity.getId()
+                    + "," + entity.getUsername()
+                    + "," + entity.getEmail()
+                    + "," + entity.getFirstName()
+                    + "," + entity.getLastName()
+                    + "," + entity.getEncryptedPassword() + ")");
             ps.executeQuery();
 
             ps.close();

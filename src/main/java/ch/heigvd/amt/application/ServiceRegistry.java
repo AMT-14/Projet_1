@@ -10,7 +10,6 @@ import ch.heigvd.amt.infrastructure.persistence.memory.InMemoryUserRepository;
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 
 @ApplicationScoped
 public class ServiceRegistry{
@@ -18,9 +17,10 @@ public class ServiceRegistry{
     @Inject @Named("JdbcUserRepository")
     IUserRepository userRepository;
 
-    private static ServiceRegistry singleton;
+    @Inject @Named("JdbcQuestionRepository")
+    IQuestionRepository questionRepository;
 
-    private static IQuestionRepository questionRepository;
+    private static ServiceRegistry singleton;
     private static QuestionFacade questionFacade;
 
     private static IdentityManagementFacade identityManagementFacade;
