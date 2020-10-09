@@ -1,11 +1,11 @@
 version: '3.3'
 services:
   db:
-    image: mysql:5.7
+    image: ./docker/image/mysql
     restart: always
     environment:
       MYSQL_DATABASE: 'db'
-      MYSQL_USER: 'root'
+      MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
     ports:
