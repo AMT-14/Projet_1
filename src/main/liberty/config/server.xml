@@ -14,10 +14,10 @@
     <library id="MySqlLib">
         <fileset dir="${Server.config.dir}" includes="*.jar"/>
     </library>
-    <dataSource jndiName="DPprojet1">
+    <dataSource jndiName="jdbc/">
         <jdbcDriver libraryRef="MySqlLib"/>
-        <properties databaseName="AMT_Projet1"
-                    serveurName="localhost" portNumber="3306"
+        <properties databaseName="DBProjet1"
+                    serveurName="database" portNumber="3306"
                     user="root" password="password"/>
     </dataSource>
 </server>

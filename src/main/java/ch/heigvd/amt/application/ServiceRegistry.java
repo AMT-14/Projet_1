@@ -4,10 +4,12 @@ import ch.heigvd.amt.application.identitymng.IdentityManagementFacade;
 import ch.heigvd.amt.application.question.QuestionFacade;
 import ch.heigvd.amt.domain.question.IQuestionRepository;
 import ch.heigvd.amt.domain.user.IUserRepository;
+import ch.heigvd.amt.infrastructure.persistence.jdbc.JdbcQuestionRepository;
+import ch.heigvd.amt.infrastructure.persistence.jdbc.JdbcUserRepository;
 import ch.heigvd.amt.infrastructure.persistence.memory.InMemoryQuestionRepository;
 import ch.heigvd.amt.infrastructure.persistence.memory.InMemoryUserRepository;
 
-import javax.faces.bean.ApplicationScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -34,9 +36,9 @@ public class ServiceRegistry{
 
     private ServiceRegistry(){
         singleton = this;
-        questionRepository = new InMemoryQuestionRepository();
+        questionRepository = new JdbcQuestionRepository();
         questionFacade = new QuestionFacade(questionRepository);
-        userRepository = new InMemoryUserRepository();
+        userRepository = new JdbcUserRepository();
         identityManagementFacade = new IdentityManagementFacade(userRepository);
     }
 
