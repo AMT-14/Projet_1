@@ -14,7 +14,7 @@
     <library id="MySqlLib">
         <fileset dir="${Server.config.dir}" includes="*.jar"/>
     </library>
-    <dataSource jndiName="jdbc/">
+    <dataSource jndiName="jdbc/DBProjet">
         <jdbcDriver libraryRef="MySqlLib"/>
         <properties databaseName="DBProjet1"
                     serveurName="database" portNumber="3306"

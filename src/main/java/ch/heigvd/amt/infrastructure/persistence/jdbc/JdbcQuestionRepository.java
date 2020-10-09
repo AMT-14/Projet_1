@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 @Named("JdbcUserRepository")
 public class JdbcQuestionRepository implements IQuestionRepository {
 
-    @Resource(lookup = "DPprojet1")
+    @Resource(lookup = "jdbc/DBProjet1")
     DataSource dataSource;
 
     @Override
