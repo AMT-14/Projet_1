@@ -5,6 +5,9 @@
     <title>Registration page</title>
 </head>
 <body>
+
+<jsp:include page="parts/header.jsp"/>
+
 <h2>Welcome to the registration page</h2>
 <h4>Enter your username and password</h4>
         <form action="RegisterCommandServlet" method="post">
