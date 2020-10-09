@@ -36,7 +36,7 @@ public class JdbcUserRepository implements IUserRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO USER "
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO user "
                     + "VALUES (" + entity.getId()
                     + "," + entity.getUsername()
                     + "," + entity.getEmail()
@@ -59,7 +59,7 @@ public class JdbcUserRepository implements IUserRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM USER WHERE ID = " + id.toString());
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM user WHERE user_id = " + id.toString());
             ps.executeQuery();
 
             ps.close();
@@ -76,18 +76,18 @@ public class JdbcUserRepository implements IUserRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM USER WHERE ID = " + id.toString());
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM user WHERE user_id = " + id.toString());
             ResultSet set = ps.executeQuery();
 
             set.next();
 
             User resultUser = User.builder().
-                    id(new UserId(set.getString("ID")))
+                    id(new UserId(set.getString("user_id")))
                     .username(set.getString("username"))
                     .email(set.getString("email"))
-                    .firstName(set.getString("firstname"))
-                    .lastName(set.getString("lastname"))
-                    .encryptedPassword(set.getString("encryptedpassword")).build();
+                    .firstName(set.getString("first_name"))
+                    .lastName(set.getString("last_name"))
+                    .encryptedPassword(set.getString("password")).build();
 
             result = Optional.of(resultUser);
             ps.close();
@@ -110,12 +110,12 @@ public class JdbcUserRepository implements IUserRepository {
 
             while (set.next()) {
                 User nextUser = User.builder().
-                        id(new UserId(set.getString("ID")))
+                        id(new UserId(set.getString("user_id")))
                         .username(set.getString("username"))
                         .email(set.getString("email"))
-                        .firstName(set.getString("firstname"))
-                        .lastName(set.getString("lastname"))
-                        .encryptedPassword(set.getString("encryptedpassword")).build();
+                        .firstName(set.getString("first_name"))
+                        .lastName(set.getString("last_name"))
+                        .encryptedPassword(set.getString("password")).build();
 
                 result.add(nextUser);
             }
@@ -131,7 +131,32 @@ public class JdbcUserRepository implements IUserRepository {
 
     @Override
     public Optional<User> findByUsername(String username) {
-        return Optional.empty();
+        Optional<User> result = Optional.empty();
+
+        try {
+            Connection conn = dataSource.getConnection();
+
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM user WHERE username = " + username);
+            ResultSet set = ps.executeQuery();
+
+            set.next();
+
+            User resultUser = User.builder().
+                    id(new UserId(set.getString("user_id")))
+                    .username(set.getString("username"))
+                    .email(set.getString("email"))
+                    .firstName(set.getString("first_name"))
+                    .lastName(set.getString("last_name"))
+                    .encryptedPassword(set.getString("password")).build();
+
+            result = Optional.of(resultUser);
+            ps.close();
+            conn.close();
+
+        } catch (SQLException throwables) {
+            Logger.getLogger(JdbcUserRepository.class.getName()).log(Level.SEVERE, null, throwables);
+        }
+        return result;
     }
 
 }

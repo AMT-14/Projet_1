@@ -5,6 +5,7 @@ import ch.heigvd.amt.domain.question.IQuestionRepository;
 import ch.heigvd.amt.domain.question.Question;
 import ch.heigvd.amt.domain.question.QuestionId;
 import ch.heigvd.amt.domain.question.QuestionType;
+import ch.heigvd.amt.domain.user.User;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
@@ -38,7 +39,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO USER "
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO question "
                     + "VALUES (" + entity.getId()
                     + "," + entity.getAuthor()
                     + "," + entity.getQuestionType()
@@ -58,7 +59,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM QUESTION WHERE ID = " + id.toString());
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM question WHERE question_id = " + id.toString());
             ps.executeQuery();
 
             ps.close();
@@ -71,7 +72,30 @@ public class JdbcQuestionRepository implements IQuestionRepository {
 
     @Override
     public Optional<Question> findById(QuestionId id) {
-        return Optional.empty();
+        Optional<Question> result = Optional.empty();
+
+        try {
+            Connection conn = dataSource.getConnection();
+
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM question WHERE question_id = " + id.toString());
+            ResultSet set = ps.executeQuery();
+
+            set.next();
+
+            Question resultQuestion = Question.builder()
+                    .id(new QuestionId(set.getString("question_id")))
+                    .author(set.getString("author_id"))
+                    .questionType((QuestionType)set.getObject("question_type"))
+                    .text(set.getString("text")).build();
+
+            result = Optional.of(resultQuestion);
+            ps.close();
+            conn.close();
+
+        } catch (SQLException throwables) {
+            Logger.getLogger(JdbcUserRepository.class.getName()).log(Level.SEVERE, null, throwables);
+        }
+        return result;
     }
 
     @Override
@@ -80,17 +104,17 @@ public class JdbcQuestionRepository implements IQuestionRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM QUESTION");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM question");
             ResultSet set = ps.executeQuery();
 
             while (set.next()) {
-                Question nextUser = Question.builder()
-                        .id(new QuestionId(set.getString("ID")))
-                        .author(set.getString("author"))
-                        .questionType((QuestionType)set.getObject("type"))
+                Question nextQuestion = Question.builder()
+                        .id(new QuestionId(set.getString("question_id")))
+                        .author(set.getString("author_id"))
+                        .questionType((QuestionType)set.getObject("question_type"))
                         .text(set.getString("text")).build();
 
-                result.add(nextUser);
+                result.add(nextQuestion);
             }
 
             ps.close();
