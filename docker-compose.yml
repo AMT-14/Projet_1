@@ -13,7 +13,7 @@ services:
     expose:
       - '3306'
   app:
-    image: ghcr.io/amt-14/test_amt_team_14:latest
+    image: ghcr.io/amt-14/jdbc_test:latest
     ports:
       - '9080:9080'
     links:
