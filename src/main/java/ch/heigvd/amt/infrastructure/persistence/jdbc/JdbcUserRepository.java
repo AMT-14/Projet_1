@@ -34,6 +34,10 @@ public class JdbcUserRepository implements IUserRepository {
     @Override
     public void save(User entity) {
         try {
+
+            System.out.println("\n\n\n\n This is a debug test \n\n\n\n");
+            System.out.println("datasource = " + dataSource);
+            
             Connection conn = dataSource.getConnection();
 
             PreparedStatement ps = conn.prepareStatement("INSERT INTO user "
