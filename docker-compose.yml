@@ -19,5 +19,6 @@ services:
     image: ghcr.io/amt-14/jdbc_test:latest
     ports:
       - '9080:9080'
+      - '7777:7777'
     links:
       - "database:db"
