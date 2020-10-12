@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS DBProjet1;
 USE DBProjet1;
-CREATE TABLE user (
+CREATE TABLE IF NOT EXISTS user (
 user_id CHAR PRIMARY KEY,
 username CHAR UNIQUE NOT NULL,
 email CHAR UNIQUE NOT NULL,
@@ -8,7 +8,7 @@ first_name CHAR NOT NULL,
 last_name CHAR NOT NULL,
 password CHAR NOT NULL
 );
-CREATE TABLE question (
+CREATE TABLE IF NOT EXISTS question (
 question_id CHAR PRIMARY KEY,
 author_id CHAR NOT NULL,
 question_type CHAR, 
