@@ -23,7 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-@Named("JdbcUserRepository")
+@Named("JdbcQuestionRepository")
 public class JdbcQuestionRepository implements IQuestionRepository {
 
     @Resource(lookup = "jdbc/DBProjet")
