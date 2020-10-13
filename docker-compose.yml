@@ -8,7 +8,7 @@ services:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
-    command: --init-file /data/application/init.sql
+    command: '--init-file /data/application/init.sql'
     volumes:
         - ./docker/images/mysql/schema/init.sql:/data/application/init.sql
     ports:
