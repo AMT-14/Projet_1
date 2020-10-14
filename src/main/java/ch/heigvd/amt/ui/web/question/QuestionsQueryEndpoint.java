@@ -5,6 +5,9 @@ import ch.heigvd.amt.application.question.QuestionFacade;
 import ch.heigvd.amt.application.question.QuestionsDTO;
 import ch.heigvd.amt.application.question.QuestionsQuery;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +17,10 @@ import java.io.IOException;
 
 @WebServlet(name="QuestionsPageHandler", urlPatterns = "/questions")
 public class QuestionsQueryEndpoint extends HttpServlet{
-    private ServiceRegistry serviceRegistry;
+
+    @Inject @Named("ServiceRegistry")
+    ServiceRegistry serviceRegistry;
+
     private QuestionFacade questionFacade;
 
     @Override
