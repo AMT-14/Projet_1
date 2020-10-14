@@ -20,9 +20,8 @@ public class ProposeQuestionCommandEndpoint extends HttpServlet{
     @Named("ServiceRegistry")
     ServiceRegistry serviceRegistry;
 
-    private QuestionFacade questionFacade = serviceRegistry.getQuestionFacade();
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        QuestionFacade questionFacade = serviceRegistry.getQuestionFacade();
         ProposeQuestionCommand command = ProposeQuestionCommand.builder()
                 .author("anonymous")
                 .text(request.getParameter("text"))

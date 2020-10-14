@@ -27,11 +27,10 @@ public class LoginCommandEndpoint extends HttpServlet {
     @Named("ServiceRegistry")
     ServiceRegistry serviceRegistry;
 
-    private IdentityManagementFacade identityManagementFacade = serviceRegistry.getIdentityManagementFacade();
-
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        IdentityManagementFacade identityManagementFacade = serviceRegistry.getIdentityManagementFacade();
         request.getSession().removeAttribute("errors");
         CurrentUserDTO currentUser = null;
 

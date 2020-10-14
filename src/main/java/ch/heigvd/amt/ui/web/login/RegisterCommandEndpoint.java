@@ -21,15 +21,14 @@ import java.util.List;
 @WebServlet(name = "RegisterCommandServlet", urlPatterns = "/register.do")
 public class RegisterCommandEndpoint extends HttpServlet {
 
-    @Inject
-    @Named("ServiceRegistry")
+    @Inject @Named("ServiceRegistry")
     ServiceRegistry serviceRegistry;
-    private IdentityManagementFacade identityManagementFacade = serviceRegistry.getIdentityManagementFacade();
 
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        IdentityManagementFacade identityManagementFacade = serviceRegistry.getIdentityManagementFacade();
         request.getSession().removeAttribute("errors");
         // set content type header before accessing the Writer
         response.setContentType("text/html");

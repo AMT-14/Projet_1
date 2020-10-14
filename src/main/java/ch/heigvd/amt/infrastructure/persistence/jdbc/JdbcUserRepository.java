@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 @Named("JdbcUserRepository")
 public class JdbcUserRepository implements IUserRepository {
 
-    @Resource(lookup = "jdbc/DBProjet")
+    @Resource (lookup ="jdbc/DBProjet")
     DataSource dataSource;
 
     public JdbcUserRepository() {

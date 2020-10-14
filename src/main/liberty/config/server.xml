@@ -12,12 +12,13 @@
                   httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
 
     <library id="MySqlLib">
-        <fileset dir="${Server.config.dir}" includes="*.jar"/>
+        <fileset dir="${server.config.dir}" includes="*.jar"/>
     </library>
     <dataSource jndiName="jdbc/DBProjet">
         <jdbcDriver libraryRef="MySqlLib"/>
         <properties databaseName="DBProjet1"
-                    serveurName="localhost" portNumber="3306"
+                    serverName="localhost" portNumber="3306"
                     user="root" password="password"/>
     </dataSource>
+
 </server>
