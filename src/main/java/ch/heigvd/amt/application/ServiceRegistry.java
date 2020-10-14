@@ -12,6 +12,7 @@ import ch.heigvd.amt.infrastructure.persistence.memory.InMemoryUserRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.annotation.PostConstruct;
 
 @ApplicationScoped
 public class ServiceRegistry{
@@ -22,32 +23,21 @@ public class ServiceRegistry{
     @Inject @Named("JdbcQuestionRepository")
     IQuestionRepository questionRepository;
 
-    private static ServiceRegistry singleton;
-    private static QuestionFacade questionFacade;
+    private QuestionFacade questionFacade;
 
-    private static IdentityManagementFacade identityManagementFacade;
+    private IdentityManagementFacade identityManagementFacade;
 
-    public static ServiceRegistry getServiceRegistry(){
-        if(singleton == null){
-            singleton = new ServiceRegistry();
-        }
-        return singleton;
-    }
-
-    private ServiceRegistry(){
-        singleton = this;
-        questionRepository = new JdbcQuestionRepository();
+    @PostConstruct
+    public void init() {
         questionFacade = new QuestionFacade(questionRepository);
-        userRepository = new JdbcUserRepository();
         identityManagementFacade = new IdentityManagementFacade(userRepository);
     }
-
 
     public QuestionFacade getQuestionFacade(){
         return questionFacade;
     }
 
-    public static IdentityManagementFacade getIdentityManagementFacade(){
+    public IdentityManagementFacade getIdentityManagementFacade(){
         return identityManagementFacade;
     }
 }

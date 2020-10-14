@@ -19,7 +19,7 @@ import java.util.List;
 @WebServlet(name = "RegisterCommandServlet", urlPatterns = "/register.do")
 public class RegisterCommandEndpoint extends HttpServlet {
 
-    private ServiceRegistry serviceRegistry = ServiceRegistry.getServiceRegistry();
+    private ServiceRegistry serviceRegistry;
     private IdentityManagementFacade identityManagementFacade = serviceRegistry.getIdentityManagementFacade();
 
     @SneakyThrows

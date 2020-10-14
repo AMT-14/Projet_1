@@ -21,7 +21,7 @@ import java.util.List;
 @WebServlet(name = "LoginCommandServlet", urlPatterns = "/login.do")
 public class LoginCommandEndpoint extends HttpServlet {
 
-    private ServiceRegistry serviceRegistery = ServiceRegistry.getServiceRegistry();
+    private ServiceRegistry serviceRegistery;
     private IdentityManagementFacade identityManagementFacade = serviceRegistery.getIdentityManagementFacade();
 
     @SneakyThrows
@@ -36,7 +36,7 @@ public class LoginCommandEndpoint extends HttpServlet {
                 .build();
 
         try{
-            currentUser = ServiceRegistry.getIdentityManagementFacade().authenticate(command);
+            currentUser = serviceRegistery.getIdentityManagementFacade().authenticate(command);
             request.getSession().setAttribute("currentUser", currentUser);
 
             // place where we keep the original target URL, with that after logged in the user can finally  be redirected to their page
