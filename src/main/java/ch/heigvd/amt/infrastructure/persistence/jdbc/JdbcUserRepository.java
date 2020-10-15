@@ -140,19 +140,18 @@ public class JdbcUserRepository implements IUserRepository {
 
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM user WHERE username = " + username);
             ResultSet set = ps.executeQuery();
-            if (set != null)
-            //set.next();
-            {
-                User resultUser = User.builder().
-                        id(new UserId(set.getString("user_id")))
-                        .username(set.getString("username"))
-                        .email(set.getString("email"))
-                        .firstName(set.getString("first_name"))
-                        .lastName(set.getString("last_name"))
-                        .encryptedPassword(set.getString("password")).build();
 
-                result = Optional.of(resultUser);
-            }
+            set.next();
+
+            User resultUser = User.builder().
+                    id(new UserId(set.getString("user_id")))
+                    .username(set.getString("username"))
+                    .email(set.getString("email"))
+                    .firstName(set.getString("first_name"))
+                    .lastName(set.getString("last_name"))
+                    .encryptedPassword(set.getString("password")).build();
+
+            result = Optional.of(resultUser);
             ps.close();
             conn.close();
 
