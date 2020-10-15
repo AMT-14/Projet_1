@@ -5,7 +5,7 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: 'DBProjet1'
-      MYSQL_USER: 'user'
+      MYSQL_USER: 'U'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
     command: '--init-file /data/application/init.sql'
