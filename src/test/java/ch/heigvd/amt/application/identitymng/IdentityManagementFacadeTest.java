@@ -8,39 +8,43 @@ import ch.heigvd.amt.application.identitymng.login.RegisterCommand;
 import ch.heigvd.amt.application.identitymng.login.RegistrationFailedException;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IdentityManagementFacadeTest {
 
-    public IdentityManagementFacade facade;
-    public ServiceRegistry registry;
-    public RegisterCommand registerCommand;
-    public LoginCommand loginCommand;
-    public String clearTextPassword = "N!ceP@ssw0rdBruh";
+    public static IdentityManagementFacade facade;
+    public static ServiceRegistry registry;
+    public static RegisterCommand registerCommand;
+    public static LoginCommand loginCommand;
+    public static String clearTextPassword = "N!ceP@ssw0rdBruh";
 
     @BeforeAll
-    public static void IdentityManagementFacadeInitialization(IdentityManagementFacadeTest facadeTest) throws Exception {
+    public static void IdentityManagementFacadeInitialization() throws Exception {
 
-        facadeTest.facade = facadeTest.registry.getIdentityManagementFacade();
+        facade = registry.getIdentityManagementFacade();
 
-        facadeTest.registerCommand = RegisterCommand.builder()
+        registerCommand = RegisterCommand.builder()
                 .username("Username")
                 .email("username@domain.ch")
                 .firstName("Test")
                 .lastName("USER")
-                .clearTextPassword(facadeTest.clearTextPassword)
+                .clearTextPassword(clearTextPassword)
                 .build();
 
-        facadeTest.loginCommand = LoginCommand.builder()
-                .username(facadeTest.registerCommand.getUsername())
-                .clearTextPassword(facadeTest.clearTextPassword)
+        loginCommand = LoginCommand.builder()
+                .username(registerCommand.getUsername())
+                .clearTextPassword(clearTextPassword)
                 .build();
+
+//        facade.register(registerCommand);
         try {
-            facadeTest.facade.authenticate(LoginCommand.builder().username("Username").clearTextPassword(facadeTest.clearTextPassword).build());
-        } catch (LoginFailedException exception) {
-            facadeTest.facade.register(facadeTest.registerCommand);
+            facade.authenticate(LoginCommand.builder().username("Username").clearTextPassword(clearTextPassword).build());
+        } catch (LoginFailedException e) {
+            facade.register(registerCommand);
         }
     }
 
