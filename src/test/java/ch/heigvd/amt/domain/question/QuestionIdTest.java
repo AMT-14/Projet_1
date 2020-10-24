@@ -1,11 +1,15 @@
-package ch.heigvd.amt.domain.user;
+package ch.heigvd.amt.domain.question;
+
 
 import org.junit.jupiter.api.Test;
+
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserIdTest {
+public class QuestionIdTest {
+
 
     public UUID uuid =  UUID.randomUUID();
     public String test = uuid.toString();
@@ -13,19 +17,18 @@ public class UserIdTest {
 
     @Test
     public void testIdGenerated(){
-
-        assertNotNull(new UserId());
+        assertNotNull(new QuestionId());
     }
 
     @Test
     public void testIdConstructorStringWithInput(){
-        UserId uid1 = new UserId(test);
+        QuestionId uid1 = new QuestionId(test);
         assertNotNull(uid1);
     }
 
     @Test
     public void testIdConstructorUUIDWithInput(){
-        UserId uid1 = new UserId(uuid);
+        QuestionId uid1 = new QuestionId(uuid);
         assertNotNull(uid1);
     }
 
@@ -33,17 +36,16 @@ public class UserIdTest {
     public void testIdConstructorUUIDWithNull(){
         assertThrows(NullPointerException.class, () -> {
             UUID uuidN = null ;
-            UserId uid1 = new UserId(uuidN);
+            QuestionId uid1 = new QuestionId(uuidN);
         });
     }
 
     @Test
     public void testIdConstructorEquivalent(){
-        UserId uid1 = new UserId(test);
-        UserId uid2 = new UserId(uuid);
+        QuestionId uid1 = new QuestionId(test);
+        QuestionId uid2 = new QuestionId(uuid);
+
         assertEquals(uid1, uid2);
         assertEquals(uid1.asString(), uid2.asString());
     }
-
-
 }
