@@ -40,7 +40,7 @@ public class JdbcUserRepository implements IUserRepository {
             String query = " insert into user (user_id, username, email, first_name, last_name, password)"
                     + " values (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, entity.getId().toString());
+            ps.setString(1, entity.getId().asString());
             ps.setString(2, entity.getUsername());
             ps.setString(3, entity.getEmail());
             ps.setString(4, entity.getFirstName());
@@ -65,7 +65,7 @@ public class JdbcUserRepository implements IUserRepository {
 
             String query = "DELETE FROM user WHERE user_id LIKE ?";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, id.toString());
+            ps.setString(1, id.asString());
             ps.executeQuery();
 
             ps.close();
@@ -83,7 +83,7 @@ public class JdbcUserRepository implements IUserRepository {
             Connection conn = dataSource.getConnection();
             String query = "SELECT * FROM user WHERE user_id LIKE ?";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, id.toString());
+            ps.setString(1, id.asString());
             ResultSet set = ps.executeQuery();
 
             if(set.next()) {
