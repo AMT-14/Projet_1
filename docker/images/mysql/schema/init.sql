@@ -1,17 +1,17 @@
 CREATE DATABASE IF NOT EXISTS DBProjet1;
 USE DBProjet1;
 CREATE TABLE IF NOT EXISTS user (
-user_id CHAR PRIMARY KEY,
-username CHAR UNIQUE NOT NULL,
-email CHAR UNIQUE NOT NULL,
-first_name CHAR NOT NULL,
-last_name CHAR NOT NULL,
-password CHAR NOT NULL
+user_id VARCHAR PRIMARY KEY,
+username VARCHAR UNIQUE NOT NULL,
+email VARCHAR UNIQUE NOT NULL,
+first_name VARCHAR NOT NULL,
+last_name VARCHAR NOT NULL,
+password VARCHAR NOT NULL
 );
 CREATE TABLE IF NOT EXISTS question (
-question_id CHAR PRIMARY KEY,
-author_id CHAR NOT NULL,
-question_type CHAR, 
+question_id VARCHAR PRIMARY KEY,
+author_id VARCHAR NOT NULL,
+question_type VARCHAR, 
 text LONGTEXT NOT NULL,
 FOREIGN KEY (author_id) REFERENCES user(user_id)
 );
