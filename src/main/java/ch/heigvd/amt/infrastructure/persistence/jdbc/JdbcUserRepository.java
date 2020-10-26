@@ -37,14 +37,16 @@ public class JdbcUserRepository implements IUserRepository {
         try {
 
             Connection conn = dataSource.getConnection();
+            String query = " insert into user (user_id, username, email, first_name, last_name, password)"
+                    + " values (?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, entity.getId().toString());
+            ps.setString(2, entity.getUsername());
+            ps.setString(3, entity.getEmail());
+            ps.setString(4, entity.getFirstName());
+            ps.setString(5, entity.getLastName());
+            ps.setString(6, entity.getEncryptedPassword());
 
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO user "
-                    + "VALUES (" + entity.getId()
-                    + "," + entity.getUsername()
-                    + "," + entity.getEmail()
-                    + "," + entity.getFirstName()
-                    + "," + entity.getLastName()
-                    + "," + entity.getEncryptedPassword() + ")");
             ps.executeQuery();
 
             ps.close();
@@ -107,7 +109,7 @@ public class JdbcUserRepository implements IUserRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM USER");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM user");
             ResultSet set = ps.executeQuery();
 
             while (set.next()) {
