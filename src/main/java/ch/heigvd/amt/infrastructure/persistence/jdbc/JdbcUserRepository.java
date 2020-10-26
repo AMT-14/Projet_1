@@ -63,7 +63,9 @@ public class JdbcUserRepository implements IUserRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM user WHERE user_id = " + id.toString());
+            String query = "DELETE FROM user WHERE user_id LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, id.toString());
             ps.executeQuery();
 
             ps.close();
@@ -79,8 +81,9 @@ public class JdbcUserRepository implements IUserRepository {
 
         try {
             Connection conn = dataSource.getConnection();
-
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM user WHERE user_id = " + id.toString());
+            String query = "SELECT * FROM user WHERE user_id LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, id.toString());
             ResultSet set = ps.executeQuery();
 
             if(set.next()) {
@@ -109,7 +112,8 @@ public class JdbcUserRepository implements IUserRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM user");
+            String query = "SELECT * FROM user";
+            PreparedStatement ps = conn.prepareStatement(query);
             ResultSet set = ps.executeQuery();
 
             while (set.next()) {
@@ -140,7 +144,9 @@ public class JdbcUserRepository implements IUserRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM user WHERE username = " + username);
+            String query = "SELECT * FROM user WHERE username LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, username);
             ResultSet set = ps.executeQuery();
 
             if(set.next()) {
