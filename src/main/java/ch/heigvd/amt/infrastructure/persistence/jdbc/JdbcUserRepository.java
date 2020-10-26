@@ -47,7 +47,7 @@ public class JdbcUserRepository implements IUserRepository {
             ps.setString(5, entity.getLastName());
             ps.setString(6, entity.getEncryptedPassword());
 
-            ps.executeQuery();
+            ps.executeUpdate();
 
             ps.close();
             conn.close();
@@ -83,17 +83,17 @@ public class JdbcUserRepository implements IUserRepository {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM user WHERE user_id = " + id.toString());
             ResultSet set = ps.executeQuery();
 
-            set.next();
+            if(set.next()) {
+                User resultUser = User.builder().
+                        id(new UserId(set.getString("user_id")))
+                        .username(set.getString("username"))
+                        .email(set.getString("email"))
+                        .firstName(set.getString("first_name"))
+                        .lastName(set.getString("last_name"))
+                        .encryptedPassword(set.getString("password")).build();
 
-            User resultUser = User.builder().
-                    id(new UserId(set.getString("user_id")))
-                    .username(set.getString("username"))
-                    .email(set.getString("email"))
-                    .firstName(set.getString("first_name"))
-                    .lastName(set.getString("last_name"))
-                    .encryptedPassword(set.getString("password")).build();
-
-            result = Optional.of(resultUser);
+                result = Optional.of(resultUser);
+            }
             ps.close();
             conn.close();
 
@@ -143,17 +143,17 @@ public class JdbcUserRepository implements IUserRepository {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM user WHERE username = " + username);
             ResultSet set = ps.executeQuery();
 
-            set.next();
+            if(set.next()) {
+                User resultUser = User.builder().
+                        id(new UserId(set.getString("user_id")))
+                        .username(set.getString("username"))
+                        .email(set.getString("email"))
+                        .firstName(set.getString("first_name"))
+                        .lastName(set.getString("last_name"))
+                        .encryptedPassword(set.getString("password")).build();
 
-            User resultUser = User.builder().
-                    id(new UserId(set.getString("user_id")))
-                    .username(set.getString("username"))
-                    .email(set.getString("email"))
-                    .firstName(set.getString("first_name"))
-                    .lastName(set.getString("last_name"))
-                    .encryptedPassword(set.getString("password")).build();
-
-            result = Optional.of(resultUser);
+                result = Optional.of(resultUser);
+            }
             ps.close();
             conn.close();
 

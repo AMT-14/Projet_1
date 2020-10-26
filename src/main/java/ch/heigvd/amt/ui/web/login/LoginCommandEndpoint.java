@@ -32,7 +32,7 @@ public class LoginCommandEndpoint extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         IdentityManagementFacade identityManagementFacade = serviceRegistry.getIdentityManagementFacade();
         request.getSession().removeAttribute("errors");
-        CurrentUserDTO currentUser = null;
+        CurrentUserDTO currentUser;
 
         LoginCommand command = LoginCommand.builder()
                 .username(request.getParameter("username"))
@@ -40,7 +40,7 @@ public class LoginCommandEndpoint extends HttpServlet {
                 .build();
 
         try{
-            currentUser = serviceRegistry.getIdentityManagementFacade().authenticate(command);
+            currentUser = identityManagementFacade.authenticate(command);
             request.getSession().setAttribute("currentUser", currentUser);
 
             // place where we keep the original target URL, with that after logged in the user can finally  be redirected to their page
