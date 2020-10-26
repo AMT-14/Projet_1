@@ -39,11 +39,14 @@ public class JdbcQuestionRepository implements IQuestionRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO question "
-                    + "VALUES (" + entity.getId()
-                    + "," + entity.getAuthor()
-                    + "," + entity.getQuestionType()
-                    + "," + entity.getText() + ")");
+            String query = " INSERT INTO question (question_id, author_id, question_type, text)"
+                    + " values (?, ?, ?, ?)";;
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, entity.getId().asString());
+            ps.setString(2, entity.getAuthor());
+            ps.setString(3, entity.getQuestionType().toString());
+            ps.setString(4, entity.getText());
+
             ps.executeQuery();
 
             ps.close();
@@ -59,7 +62,9 @@ public class JdbcQuestionRepository implements IQuestionRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM question WHERE question_id = " + id.toString());
+            String query = "DELETE FROM question WHERE question_id LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, id.asString());
             ps.executeQuery();
 
             ps.close();
@@ -77,18 +82,21 @@ public class JdbcQuestionRepository implements IQuestionRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM question WHERE question_id = " + id.toString());
+            String query = "SELECT * FROM question WHERE question_id LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, id.asString());
             ResultSet set = ps.executeQuery();
 
-            set.next();
+            if(set.next()) {
 
-            Question resultQuestion = Question.builder()
-                    .id(new QuestionId(set.getString("question_id")))
-                    .author(set.getString("author_id"))
-                    .questionType((QuestionType)set.getObject("question_type"))
-                    .text(set.getString("text")).build();
+                Question resultQuestion = Question.builder()
+                        .id(new QuestionId(set.getString("question_id")))
+                        .author(set.getString("author_id"))
+                        .questionType((QuestionType) set.getObject("question_type"))
+                        .text(set.getString("text")).build();
 
-            result = Optional.of(resultQuestion);
+                result = Optional.of(resultQuestion);
+            }
             ps.close();
             conn.close();
 
@@ -104,7 +112,8 @@ public class JdbcQuestionRepository implements IQuestionRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM question");
+            String query = "SELECT * FROM question";
+            PreparedStatement ps = conn.prepareStatement(query);
             ResultSet set = ps.executeQuery();
 
             while (set.next()) {

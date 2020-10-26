@@ -37,8 +37,8 @@ public class JdbcUserRepository implements IUserRepository {
         try {
 
             Connection conn = dataSource.getConnection();
-            String query = " insert into user (user_id, username, email, first_name, last_name, password)"
-                    + " values (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO user (user_id, username, email, first_name, last_name, password)"
+                    + " VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, entity.getId().asString());
             ps.setString(2, entity.getUsername());
