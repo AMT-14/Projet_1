@@ -66,7 +66,7 @@ public class JdbcUserRepository implements IUserRepository {
             String query = "DELETE FROM user WHERE user_id LIKE ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, id.asString());
-            ps.executeQuery();
+            ps.executeUpdate();
 
             ps.close();
             conn.close();

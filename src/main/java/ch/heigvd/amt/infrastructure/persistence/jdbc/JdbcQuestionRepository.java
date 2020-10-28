@@ -53,7 +53,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
             ps.setString(3, entity.getQuestionType().toString());
             ps.setString(4, entity.getText());
 
-            ps.executeQuery();
+            ps.executeUpdate();
 
             ps.close();
             conn.close();
@@ -71,7 +71,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
             String query = "DELETE FROM question WHERE question_id LIKE ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, id.asString());
-            ps.executeQuery();
+            ps.executeUpdate();
 
             ps.close();
             conn.close();
