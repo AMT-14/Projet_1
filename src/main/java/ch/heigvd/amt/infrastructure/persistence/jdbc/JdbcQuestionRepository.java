@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 @Named("JdbcQuestionRepository")
@@ -31,7 +32,12 @@ public class JdbcQuestionRepository implements IQuestionRepository {
 
     @Override
     public Collection<Question> find(QuestionsQuery query) {
-        return null;
+        if(query != null){
+            return findAll().stream()
+                    .filter(question -> question.getQuestionType() != QuestionType.NOT_SAFE_FOR_WORK)
+                    .collect(Collectors.toList());
+        }
+        return findAll();
     }
 
     @Override
@@ -111,6 +117,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
         List<Question> result = new LinkedList<>();
         try {
             Connection conn = dataSource.getConnection();
+
 
             String query = "SELECT * FROM question";
             PreparedStatement ps = conn.prepareStatement(query);
