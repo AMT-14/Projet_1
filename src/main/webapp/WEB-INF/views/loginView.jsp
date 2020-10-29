@@ -1,14 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html>
-    <head>
-        <title>AMT-14-Project1 Login </title>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-    </head>
-    <body>
-    <jsp:include page="parts/header.jsp"/>
-    <div class="container-fluid bg-danger">
+<c:set var="pageTitle" value="Login"/>
+<%@include file="parts/header.jsp"%>
+    <div class="container-fluid ">
         <div class="row">
             <div class="col">
 
@@ -16,11 +11,11 @@
                  <div class="col-form-label">
                      <h3>Log In</h3>
                  </div>
-                 <div class="form-group">
-                     <input type="text" name="username" class="form-control" id="tfUsername" placeholder="Username">
+                 <div class="form-group ">
+                     <input type="text" name="username" class="form-control bg-secondary" id="tfUsername" placeholder="Username">
                  </div>
                  <div class="form-group">
-                     <input type="password" name="password" class="form-control" id="tfPassword" placeHolder="Password">
+                     <input type="password" name="password" class="form-control bg-secondary" id="tfPassword" placeHolder="Password">
                  </div>
                  <button type="submit" id="bLogin"class="btn btn-primary">Log In</button>
              </form>
@@ -33,20 +28,20 @@
                 <h3>Register</h3>
             </div>
             <div class="form-group">
-                <input id="tfUsername" name="username" class="form-control" placeholder="Username">
+                <input id="tfUsername" name="username" class="form-control bg-secondary" placeholder="Username">
                 <small id="usernameHelp" class="form-text text-muted">Username must be unique (not case sensitive)</small>
             </div>
             <div class="form-group">
-                <input id="tfFirstName" name="firstName" class="form-control" placeHolder="First name">
+                <input id="tfFirstName" name="firstName" class="form-control bg-secondary" placeHolder="First name">
             </div>
             <div class="form-group">
-                <input id="tfLastName" name="lastName" class="form-control" placeHolder="Last name">
+                <input id="tfLastName" name="lastName" class="form-control bg-secondary" placeHolder="Last name">
             </div>
             <div class="form-group">
-                <input id="tfEmail" name="email" class="form-control" placeHolder="Email">
+                <input id="tfEmail" name="email" class="form-control bg-secondary" placeHolder="Email">
             </div>
             <div class="form-group">
-                <input id="tfPassword" type="password" class="form-control" name="password" placeholder="Password">
+                <input id="tfPassword" type="password" class="form-control bg-secondary" name="password" placeholder="Password">
             </div>
             <button type="bRegister" class="btn btn-primary">Register</button>
         </form>
@@ -60,8 +55,7 @@
         </c:forEach>
     </div>
 
-    <jsp:include page="parts/footer.jsp"/>
-    </body>
-</html>
+<jsp:include page="parts/footer.jsp"/>
+
 
 

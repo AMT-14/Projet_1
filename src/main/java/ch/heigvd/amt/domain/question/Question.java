@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Data
 @Builder(toBuilder = true)
-public class Question implements IEntity {
+public class Question implements IEntity<Question, QuestionId> {
 
     @Setter(AccessLevel.NONE)
     private QuestionId id = new QuestionId();
@@ -29,7 +29,7 @@ public class Question implements IEntity {
     public void categorizeAs(QuestionType questionType){this.questionType = questionType;}
 
     @Override
-    public IEntity deepClone() {
+    public Question deepClone() {
 
         return this.toBuilder()
                 .id(new QuestionId(id.asString()))
