@@ -8,6 +8,8 @@ import ch.heigvd.amt.application.identitymng.login.RegistrationFailedException;
 import ch.heigvd.amt.domain.user.IUserRepository;
 import ch.heigvd.amt.domain.user.User;
 
+import java.util.Optional;
+
 public class IdentityManagementFacade {
 
     private IUserRepository userRepository;
@@ -15,9 +17,9 @@ public class IdentityManagementFacade {
     public IdentityManagementFacade(IUserRepository userRepository){this.userRepository = userRepository;}
 
     public void register(RegisterCommand command) throws Exception {
-        User existingUserWithSameUsername = userRepository.findByUsername(command.getUsername()).orElse(null);
+        Optional<User> existingUserWithSameUsername = userRepository.findByUsername(command.getUsername());
 
-        if(existingUserWithSameUsername != null){
+        if(existingUserWithSameUsername.isPresent()){
             throw new RegistrationFailedException("Username is already taken");
         }
         try{
@@ -39,20 +41,15 @@ public class IdentityManagementFacade {
     public CurrentUserDTO authenticate(LoginCommand command) throws Exception {
 
         User user = userRepository.findByUsername(command.getUsername())
-                .orElseThrow(() -> {
-                    try {
-                        return new LoginFailedException("User not found");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                });
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
         boolean success = user.authenticate(command.getClearTextPassword());
         if(!success){
             throw new LoginFailedException("Authentication failed, credential miss-match");
         }
 
         CurrentUserDTO currentUser = CurrentUserDTO.builder()
+                .id(user.getId())
                 .username(user.getUsername())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())

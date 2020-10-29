@@ -17,9 +17,9 @@ import java.util.Date;
 public class Question implements IEntity<Question, QuestionId> {
 
     @Setter(AccessLevel.NONE)
-    private QuestionId id = new QuestionId();
+    private QuestionId id;
 
-    private String author;
+    private UserId authorId;
 
     private String text;
 
@@ -42,8 +42,9 @@ public class Question implements IEntity<Question, QuestionId> {
                 id = new QuestionId();
             }
 
-            if(author == null){
-                author = "deleted User";
+
+            if(authorId == null){
+                throw new IllegalArgumentException("Question needs an author");
             }
 
             if(questionType == null){
@@ -53,12 +54,12 @@ public class Question implements IEntity<Question, QuestionId> {
             if(text == null){
                 text = "";
             }
-
+            // TODO change depending on the type
             if (text.contains("sex")){
                 questionType = QuestionType.NOT_SAFE_FOR_WORK;
             }
 
-            return new Question(id, author, text, questionType);
+            return new Question(id, authorId, text, questionType);
         }
     }
 }
