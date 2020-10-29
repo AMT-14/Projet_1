@@ -54,7 +54,7 @@ public class Question implements IEntity {
             if(text == null){
                 text = "";
             }
-
+            // TODO change depending on the type
             if (text.contains("sex")){
                 questionType = QuestionType.NOT_SAFE_FOR_WORK;
             }

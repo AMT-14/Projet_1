@@ -1,6 +1,7 @@
 package ch.heigvd.amt.ui.web.question;
 
 import ch.heigvd.amt.application.ServiceRegistry;
+import ch.heigvd.amt.application.identitymng.authenticate.CurrentUserDTO;
 import ch.heigvd.amt.application.question.ProposeQuestionCommand;
 import ch.heigvd.amt.application.question.QuestionFacade;
 
@@ -22,8 +23,9 @@ public class ProposeQuestionCommandEndpoint extends HttpServlet{
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         QuestionFacade questionFacade = serviceRegistry.getQuestionFacade();
+        CurrentUserDTO user = (CurrentUserDTO) request.getSession().getAttribute("currentUser");
         ProposeQuestionCommand command = ProposeQuestionCommand.builder()
-                .author("anonymous")
+                .authorId(user.getId())
                 .text(request.getParameter("text"))
                 .build();
 
