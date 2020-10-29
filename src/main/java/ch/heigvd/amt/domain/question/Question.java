@@ -17,9 +17,9 @@ import java.util.Date;
 public class Question implements IEntity {
 
     @Setter(AccessLevel.NONE)
-    private QuestionId id = new QuestionId();
+    private QuestionId id;
 
-    private String author;
+    private UserId authorId;
 
     private String text;
 
@@ -42,8 +42,9 @@ public class Question implements IEntity {
                 id = new QuestionId();
             }
 
-            if(author == null){
-                author = "deleted User";
+
+            if(authorId == null){
+                //author = "deleted User";
             }
 
             if(questionType == null){
@@ -58,7 +59,7 @@ public class Question implements IEntity {
                 questionType = QuestionType.NOT_SAFE_FOR_WORK;
             }
 
-            return new Question(id, author, text, questionType);
+            return new Question(id, authorId, text, questionType);
         }
     }
 }

@@ -6,15 +6,14 @@ import ch.heigvd.amt.domain.question.Question;
 import ch.heigvd.amt.domain.question.QuestionId;
 import ch.heigvd.amt.domain.question.QuestionType;
 import ch.heigvd.amt.domain.user.User;
+import ch.heigvd.amt.domain.user.UserId;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,12 +43,13 @@ public class JdbcQuestionRepository implements IQuestionRepository {
     public void save(Question entity) {
         try {
             Connection conn = dataSource.getConnection();
-
+            //String userQuery = "SELECT * FROM user WHERE user_id LIKE ?";
             String query = " INSERT INTO question (question_id, author_id, question_type, text)"
-                    + " values (?, ?, ?, ?)";;
+                    + " values (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, entity.getId().asString());
-            ps.setString(2, entity.getAuthor());
+            //ps.setRef(2, authorRef);
+            ps.setString(2, entity.getAuthorId().asString());
             ps.setString(3, entity.getQuestionType().toString());
             ps.setString(4, entity.getText());
 
@@ -97,7 +97,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
 
                 Question resultQuestion = Question.builder()
                         .id(new QuestionId(set.getString("question_id")))
-                        .author(set.getString("author_id"))
+                        .authorId(new UserId(set.getString("author_id")))
                         .questionType((QuestionType) set.getObject("question_type"))
                         .text(set.getString("text")).build();
 
@@ -126,7 +126,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
             while (set.next()) {
                 Question nextQuestion = Question.builder()
                         .id(new QuestionId(set.getString("question_id")))
-                        .author(set.getString("author_id"))
+                        .authorId(new UserId(set.getString("author_id")))
                         .questionType((QuestionType)set.getObject("question_type"))
                         .text(set.getString("text")).build();
 
