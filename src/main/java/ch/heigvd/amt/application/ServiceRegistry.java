@@ -2,8 +2,11 @@ package ch.heigvd.amt.application;
 
 import ch.heigvd.amt.application.identitymng.IdentityManagementFacade;
 import ch.heigvd.amt.application.question.QuestionFacade;
+import ch.heigvd.amt.application.vote.VoteFacade;
 import ch.heigvd.amt.domain.question.IQuestionRepository;
 import ch.heigvd.amt.domain.user.IUserRepository;
+import ch.heigvd.amt.domain.vote.IVoteRepository;
+
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -20,14 +23,19 @@ public class ServiceRegistry{
     @Inject @Named("JdbcQuestionRepository")
     IQuestionRepository questionRepository;
 
-    private QuestionFacade questionFacade;
+    @Inject @Named("JdbcVoteRepository")
+   IVoteRepository voteRepository;
 
+    private VoteFacade voteFacade;
+    private QuestionFacade questionFacade;
     private IdentityManagementFacade identityManagementFacade;
 
     @PostConstruct
     public void init() {
         questionFacade = new QuestionFacade(questionRepository);
         identityManagementFacade = new IdentityManagementFacade(userRepository);
+        voteFacade = new VoteFacade(voteRepository);
+
     }
 
     public QuestionFacade getQuestionFacade(){
@@ -36,5 +44,9 @@ public class ServiceRegistry{
 
     public IdentityManagementFacade getIdentityManagementFacade(){
         return identityManagementFacade;
+    }
+
+    public VoteFacade getVoteFacade() {
+        return voteFacade;
     }
 }

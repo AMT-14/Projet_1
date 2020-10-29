@@ -32,6 +32,25 @@
                     <tr>
                         <td>
                             <div class="question text-black-50">${question.text}</div>
+                            <div class="col">
+                                <form action="$pageContext.request.contextPath}/vote.do" method="post">
+                                    <input type="hidden" name="questionID" value="${questionID}">
+                                    <input type="hidden" name="objectVoted" value="${questionID}">
+                                    <input type="hidden" name="textType" value="${TextType.QUESTION}">
+                                    <input type="hidden" name="VoteID" value="${}">
+                                    <input type="hidden" name="value" value="UP">
+                                    <button type="submit"><i class="fa fa-caret-up"></i></button>
+                                </form>
+                                <h5>TODO Vote number here</h5>
+                                <form action="$pageContext.request.contextPath}/vote.do" method="post">
+                                    <input type="hidden" name="questionID" value="${questionID}">
+                                    <input type="hidden" name="objectVoted" value="${questionID}">
+                                    <input type="hidden" name="textType" value="${TextType.QUESTION}">
+                                    <input type="hidden" name="VoteID" value="${}">
+                                    <input type="hidden" name="value" value="DOWN">
+                                    <button type="submit"><i class="fa fa-caret-down"></i></button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 </c:forEach>

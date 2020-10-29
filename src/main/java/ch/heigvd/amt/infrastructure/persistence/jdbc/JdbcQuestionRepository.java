@@ -82,6 +82,25 @@ public class JdbcQuestionRepository implements IQuestionRepository {
     }
 
     @Override
+    public void update(Question question) {
+        try {
+            Connection conn = dataSource.getConnection();
+
+            String query = "UPDATE question WHERE question_id LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, question.getId().asString());
+            ps.executeUpdate();
+
+            ps.close();
+            conn.close();
+
+        } catch (SQLException throwables) {
+            Logger.getLogger(JdbcUserRepository.class.getName()).log(Level.SEVERE, null, throwables);
+        }
+    }
+
+
+    @Override
     public Optional<Question> findById(QuestionId id) {
         Optional<Question> result = Optional.empty();
 
