@@ -1,5 +1,8 @@
 package ch.heigvd.amt.application.question;
 
+import ch.heigvd.amt.domain.question.QuestionId;
+import ch.heigvd.amt.domain.question.QuestionType;
+import ch.heigvd.amt.domain.user.UserId;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,8 +12,14 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class ProposeQuestionCommand {
     @Builder.Default
-    private String author = "Anonymous";
+    private UserId authorId = null;
 
     @Builder.Default
-    private String text = "No content";
+    private QuestionId id = null;
+
+    @Builder.Default
+    private String text = null;
+
+    @Builder.Default
+    private QuestionType type = QuestionType.OTHER;
 }

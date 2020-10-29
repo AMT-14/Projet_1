@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  database:
+    image: mysql:8.0.21
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'DBProjet1'
+      MYSQL_USER: 'U'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    command: '--init-file /data/application/init.sql'
+    volumes:
+        - ./docker/images/mysql/schema/init.sql:/data/application/init.sql
+    ports:
+      - '3306:3306'
+      - '33060:33060'
+    expose:
+      - '3306'
+  app:
+    image: ghcr.io/amt-14/jdbc_test:latest
+    ports:
+      - '9080:9080'
+      - '7777:7777'
+    links:
+      - "database:db"

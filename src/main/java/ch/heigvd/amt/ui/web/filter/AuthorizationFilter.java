@@ -53,7 +53,7 @@ public class AuthorizationFilter implements Filter {
     }
 
     boolean isResourcePublic(String URI){
-        if(URI.startsWith("/login") || URI.startsWith("/logout") || URI.startsWith("/assets") || URI.startsWith("/register")){
+        if(URI.startsWith("/login") || URI.startsWith("/logout") || URI.startsWith("/assets") || URI.startsWith("/register") || URI.startsWith("/")){
             return true;
         } else {
             return false;

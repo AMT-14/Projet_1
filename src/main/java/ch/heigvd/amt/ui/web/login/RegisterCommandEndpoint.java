@@ -6,6 +6,8 @@ import ch.heigvd.amt.application.identitymng.login.RegistrationFailedException;
 import ch.heigvd.amt.application.ServiceRegistry;
 import lombok.SneakyThrows;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,13 +21,14 @@ import java.util.List;
 @WebServlet(name = "RegisterCommandServlet", urlPatterns = "/register.do")
 public class RegisterCommandEndpoint extends HttpServlet {
 
-    private ServiceRegistry serviceRegistry = ServiceRegistry.getServiceRegistry();
-    private IdentityManagementFacade identityManagementFacade = serviceRegistry.getIdentityManagementFacade();
+    @Inject @Named("ServiceRegistry")
+    ServiceRegistry serviceRegistry;
 
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        IdentityManagementFacade identityManagementFacade = serviceRegistry.getIdentityManagementFacade();
         request.getSession().removeAttribute("errors");
         // set content type header before accessing the Writer
         response.setContentType("text/html");
