@@ -49,7 +49,7 @@ public class VoteCommandEndpoint extends HttpServlet {
 
         VoteDTO vote = null;
         Id objectVoted = null;
-        TextType textType;
+        TextType textType = null;
 
 
         if(request.getParameter("objectVotedType").equals("question")){
@@ -83,7 +83,7 @@ public class VoteCommandEndpoint extends HttpServlet {
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/questionFull?questionID=" + questionID);
+        response.sendRedirect(request.getContextPath() + "/questions?questionID=" + questionID);
 
     }
 }
