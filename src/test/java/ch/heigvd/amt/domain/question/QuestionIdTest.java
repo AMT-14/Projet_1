@@ -1,4 +1,4 @@
-package ch.heigvd.amt.domain.question;
+/*package ch.heigvd.amt.domain.question;
 
 
 import org.junit.jupiter.api.Test;
@@ -49,3 +49,4 @@ public class QuestionIdTest {
         assertEquals(uid1.asString(), uid2.asString());
     }
 }
+*/
