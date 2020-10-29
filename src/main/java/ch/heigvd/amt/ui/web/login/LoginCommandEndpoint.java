@@ -10,6 +10,8 @@ import ch.heigvd.amt.domain.user.User;
 import lombok.SneakyThrows;
 
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,14 +23,16 @@ import java.util.List;
 @WebServlet(name = "LoginCommandServlet", urlPatterns = "/login.do")
 public class LoginCommandEndpoint extends HttpServlet {
 
-    private ServiceRegistry serviceRegistery = ServiceRegistry.getServiceRegistry();
-    private IdentityManagementFacade identityManagementFacade = serviceRegistery.getIdentityManagementFacade();
+    @Inject
+    @Named("ServiceRegistry")
+    ServiceRegistry serviceRegistry;
 
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        IdentityManagementFacade identityManagementFacade = serviceRegistry.getIdentityManagementFacade();
         request.getSession().removeAttribute("errors");
-        CurrentUserDTO currentUser = null;
+        CurrentUserDTO currentUser;
 
         LoginCommand command = LoginCommand.builder()
                 .username(request.getParameter("username"))
@@ -36,7 +40,7 @@ public class LoginCommandEndpoint extends HttpServlet {
                 .build();
 
         try{
-            currentUser = ServiceRegistry.getIdentityManagementFacade().authenticate(command);
+            currentUser = identityManagementFacade.authenticate(command);
             request.getSession().setAttribute("currentUser", currentUser);
 
             // place where we keep the original target URL, with that after logged in the user can finally  be redirected to their page

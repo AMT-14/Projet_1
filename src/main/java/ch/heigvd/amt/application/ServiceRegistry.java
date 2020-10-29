@@ -6,42 +6,43 @@ import ch.heigvd.amt.application.vote.VoteFacade;
 import ch.heigvd.amt.domain.question.IQuestionRepository;
 import ch.heigvd.amt.domain.user.IUserRepository;
 import ch.heigvd.amt.domain.vote.IVoteRepository;
-import ch.heigvd.amt.infrastructure.persistence.memory.InMemoryQuestionRepository;
-import ch.heigvd.amt.infrastructure.persistence.memory.InMemoryUserRepository;
 
-import javax.servlet.http.HttpServletRequest;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.annotation.PostConstruct;
+
+@ApplicationScoped
+@Named ("ServiceRegistry")
 public class ServiceRegistry{
-    private static ServiceRegistry singleton;
 
-    private static IQuestionRepository questionRepository;
-    private static QuestionFacade questionFacade;
-    private static IUserRepository userRepository;
-    private static IdentityManagementFacade identityManagementFacade;
+    @Inject @Named("JdbcUserRepository")
+    IUserRepository userRepository;
+
+    @Inject @Named("JdbcQuestionRepository")
+    IQuestionRepository questionRepository;
+
+
     private static IVoteRepository voteRepository;
     private static VoteFacade voteFacade;
 
-    public static ServiceRegistry getServiceRegistry(){
-        if(singleton == null){
-            singleton = new ServiceRegistry();
-        }
-        return singleton;
-    }
+    private QuestionFacade questionFacade;
 
-    private ServiceRegistry(){
-        singleton = this;
-        questionRepository = new InMemoryQuestionRepository();
+    private IdentityManagementFacade identityManagementFacade;
+
+    @PostConstruct
+    public void init() {
         questionFacade = new QuestionFacade(questionRepository);
-        userRepository = new InMemoryUserRepository();
         identityManagementFacade = new IdentityManagementFacade(userRepository);
 
     }
 
-
-    public QuestionFacade getQuestionFacade(){return questionFacade;
+    public QuestionFacade getQuestionFacade(){
+        return questionFacade;
     }
 
-    public static IdentityManagementFacade getIdentityManagementFacade(){
+    public IdentityManagementFacade getIdentityManagementFacade(){
         return identityManagementFacade;
     }
 
