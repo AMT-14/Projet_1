@@ -18,7 +18,7 @@ public class Answer implements IEntity<Answer, AnswerId> {
     private UserId authorId;
     private QuestionId questionId;
     private String text;
-    private Date date;
+    private String date;
 
 
     @Override
@@ -46,9 +46,10 @@ public class Answer implements IEntity<Answer, AnswerId> {
                 throw new IllegalArgumentException("Answer text must not be null");
             }
             if(date == null){
-                date = new Date(System.currentTimeMillis());
+                date = new Date(System.currentTimeMillis()).toString();
             }
             return new Answer(id,authorId,questionId,text,date);
         }
+
     }
 }
