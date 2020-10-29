@@ -2,6 +2,7 @@ package ch.heigvd.amt.application.question;
 
 import ch.heigvd.amt.domain.question.IQuestionRepository;
 import ch.heigvd.amt.domain.question.Question;
+import ch.heigvd.amt.domain.user.UserId;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +15,7 @@ public class QuestionFacade{
 
     public void proposeQuestion(ProposeQuestionCommand command){
         Question submittedQuestion = Question.builder()
-                .author(command.getAuthor())
+                .authorId(new UserId(command.getAuthor()))
                 .text(command.getText())
                 .build();
         questionRepository.save(submittedQuestion);
