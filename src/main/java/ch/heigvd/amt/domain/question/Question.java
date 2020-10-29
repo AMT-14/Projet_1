@@ -44,7 +44,7 @@ public class Question implements IEntity {
 
 
             if(authorId == null){
-                //author = "deleted User";
+                throw new IllegalArgumentException("Question needs an author");
             }
 
             if(questionType == null){

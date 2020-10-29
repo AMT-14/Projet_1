@@ -15,8 +15,10 @@ public class QuestionFacade{
 
     public void proposeQuestion(ProposeQuestionCommand command){
         Question submittedQuestion = Question.builder()
-                .authorId(new UserId(command.getAuthor()))
+                .id(command.getId())
+                .authorId(command.getAuthorId())
                 .text(command.getText())
+                .questionType(command.getType())
                 .build();
         questionRepository.save(submittedQuestion);
     }
