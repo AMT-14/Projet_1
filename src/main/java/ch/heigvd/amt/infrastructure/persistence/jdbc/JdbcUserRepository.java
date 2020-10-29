@@ -76,6 +76,30 @@ public class JdbcUserRepository implements IUserRepository {
         }
     }
 
+    @Override
+    public void update(User user) {
+
+        try {
+            Connection conn = dataSource.getConnection();
+
+            String query = "UPDATE user SET username=?, email=?, first_name=?, last_name=?, password=? WHERE user_id LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getFirstName());
+            ps.setString(4, user.getLastName());
+            ps.setString(5, user.getEncryptedPassword());
+            ps.setString(6, user.getId().asString());
+            ps.executeUpdate();
+
+            ps.close();
+            conn.close();
+
+        } catch (SQLException throwables) {
+            Logger.getLogger(JdbcUserRepository.class.getName()).log(Level.SEVERE, null, throwables);
+        }
+    }
+
     public Optional<User> findById(UserId id) {
         Optional<User> result = Optional.empty();
 

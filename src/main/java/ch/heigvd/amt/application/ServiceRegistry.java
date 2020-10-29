@@ -23,18 +23,18 @@ public class ServiceRegistry{
     @Inject @Named("JdbcQuestionRepository")
     IQuestionRepository questionRepository;
 
+    @Inject @Named("JdbcVoteRepository")
+   IVoteRepository voteRepository;
 
-    private static IVoteRepository voteRepository;
-    private static VoteFacade voteFacade;
-
+    private VoteFacade voteFacade;
     private QuestionFacade questionFacade;
-
     private IdentityManagementFacade identityManagementFacade;
 
     @PostConstruct
     public void init() {
         questionFacade = new QuestionFacade(questionRepository);
         identityManagementFacade = new IdentityManagementFacade(userRepository);
+        voteFacade = new VoteFacade(voteRepository);
 
     }
 
