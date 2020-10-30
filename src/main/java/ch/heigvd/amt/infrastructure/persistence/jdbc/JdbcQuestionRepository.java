@@ -148,7 +148,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
                 Question nextQuestion = Question.builder()
                         .id(new QuestionId(set.getString("question_id")))
                         .authorId(new UserId(set.getString("author_id")))
-                        .questionType((QuestionType)set.getObject("question_type"))
+                        .questionType((QuestionType)set.getString("question_type"))
                         .text(set.getString("text")).build();
 
                 result.add(nextQuestion);
