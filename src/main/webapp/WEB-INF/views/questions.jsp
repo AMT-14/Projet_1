@@ -15,7 +15,7 @@
                      <small id="questionTip" class="form-text text-muted text-gray-50">Stay away from accents man, yeah really</small>
                      <textarea id="tfText" name="text" class="form-control bg-warning" form="newQuestion" rows="3"></textarea>
                  </div>
-                 <button id="bSubmitQuestion" type="submit" class="btn btn-primary">Ask my Question</button>
+                 <button id="bSubmitQuestion" name="bSubmitQuestion" type="submit" class="btn btn-primary">Ask my Question</button>
              </form>
         </div>
         <div class="col">
@@ -31,18 +31,22 @@
                             <div class="col">
                                 <form action="vote.do" method="post">
                                     <input type="hidden" name="questionID" value="${questionID}">
-                                    <input type="hidden" name="objectVoted" value="${questionID}">
                                     <input type="hidden" name="textType" value="${TextType.QUESTION}">
+                                    <input type="hidden" name="objectVotedType" value="question">
+                                    <input type="hidden" name="voteID" value="">
                                     <input type="hidden" name="value" value="UP">
-                                    <button type="submit"><i class="fas fa-arrow-up"></i></button>
+                                    <button type="submit">arrow up</i></button>
                                 </form>
+
                                 <!-- <span>${question.totalVotes}</span> -->
+                                <h5>0</h5>
                                 <form action="vote.do" method="post">
                                     <input type="hidden" name="questionID" value="${questionID}">
-                                    <input type="hidden" name="objectVoted" value="${questionID}">
                                     <input type="hidden" name="textType" value="${TextType.QUESTION}">
+                                    <input type="hidden" name="objectVotedType" value="question">
+                                    <input type="hidden" name="voteID" value="">
                                     <input type="hidden" name="value" value="DOWN">
-                                    <button type="submit"><i class="fas fa-arrow-down"></i></button>
+                                    <button type="submit">arrow down</i></button>
                                 </form>
                             </div>
                         </td>

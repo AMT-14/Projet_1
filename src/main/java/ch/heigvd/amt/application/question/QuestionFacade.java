@@ -26,8 +26,9 @@ public class QuestionFacade{
         Collection<Question> allQuestions = questionRepository.find(query);
 
         List<QuestionsDTO.QuestionDTO> allQuestionsDTO = allQuestions.stream().map(question -> QuestionsDTO.QuestionDTO.builder()
+            .id(question.getId().asString())
             .text(question.getText())
-                .author(question.getAuthorId().toString())
+            .author(question.getAuthorId().asString())
             .build()).collect(Collectors.toList());
 
         return QuestionsDTO.builder()

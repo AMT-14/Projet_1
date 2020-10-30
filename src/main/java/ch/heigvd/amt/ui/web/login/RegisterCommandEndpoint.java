@@ -35,16 +35,19 @@ public class RegisterCommandEndpoint extends HttpServlet {
 
         // retrieve values from the form in the view
         RegisterCommand registerCommand = RegisterCommand.builder()
-                .username(request.getParameter("username"))
-                .firstName(request.getParameter("firstName"))
-                .lastName(request.getParameter("lastName"))
-                .email(request.getParameter("email"))
-                .clearTextPassword(request.getParameter("password"))
+                .username(request.getParameter("registerUsername"))
+                .firstName(request.getParameter("registerFirstName"))
+                .lastName(request.getParameter("registerLastName"))
+                .email(request.getParameter("registerEmail"))
+                .clearTextPassword(request.getParameter("registerPassword"))
                 .build();
 
         try {
             identityManagementFacade.register(registerCommand);
-            request.getRequestDispatcher("/login.do").forward(request, response);
+            /*request.setAttribute("loginUsername", request.getParameter("registerUsername"));
+            request.setAttribute("loginPassword", request.getParameter("registerPassword"));
+            request.getRequestDispatcher("/login.do").forward(request, response);*/
+            response.sendRedirect("/login");
             return;
         } catch (RegistrationFailedException e) {
             request.getSession().setAttribute("errors", List.of(e.getMessage()));

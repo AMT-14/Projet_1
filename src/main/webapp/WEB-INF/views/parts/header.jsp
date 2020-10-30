@@ -6,6 +6,8 @@
         <title>Project 1 - ${pageTitle}</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="icon" type="images/icon" href="images/favicon.ico"/>
+        <link rel="arrowUP" type="image" href="images/arrowUP.png"/>
+        <link rel="arrowDOWN" type="image" href="images/arrowDOWN.png"/>
     </head>
     <body>
         <div class="container-fluid bg-warning">
