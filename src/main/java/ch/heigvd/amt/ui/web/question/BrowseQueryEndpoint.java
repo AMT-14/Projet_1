@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="QuestionsPageHandler", urlPatterns = "/browse")
+@WebServlet(name="BrowseHandler", urlPatterns = "/browse")
 public class BrowseQueryEndpoint extends HttpServlet{
 
     @Inject @Named("ServiceRegistry")
