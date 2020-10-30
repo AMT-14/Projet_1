@@ -8,13 +8,14 @@ docker-compose pull
 docker-compose up
 ```
 
-to get the app running, then you simply go to the URL mentionned.
+to get the app running, then you simply go to the following URL : localhost:9080/
 
 #### Stuff added since presentation
 
 - filter no longer blocks CSS
 - ask question is back on filter
 - browse is a public page to see the list of questions
+- a JMeter test that register, login and ask question with ~1000 different users
 
 #### Stuff that's wrong with our app
 
@@ -28,7 +29,7 @@ to get the app running, then you simply go to the URL mentionned.
 - Stats of the website
 - votes aren't working
 - tests
-- hasing of the password is still the base one (toUpperCase)
+- hashing of the password is still the base one (toUpperCase)
 
 
 
