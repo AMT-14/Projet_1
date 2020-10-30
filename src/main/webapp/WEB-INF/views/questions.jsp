@@ -15,7 +15,7 @@
                      <small id="questionTip" class="form-text text-muted text-gray-50">Stay away from accents man, yeah really</small>
                      <textarea id="tfText" name="text" class="form-control bg-warning" form="newQuestion" rows="3"></textarea>
                  </div>
-                 <button id="bSubmitQuestion" type="submit" class="btn btn-primary">Ask my Question</button>
+                 <button id="bSubmitQuestion" name="bSubmitQuestion" type="submit" class="btn btn-primary">Ask my Question</button>
              </form>
         </div>
         <div class="col">
