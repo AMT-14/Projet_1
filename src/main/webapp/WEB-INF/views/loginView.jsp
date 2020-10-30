@@ -12,12 +12,12 @@
                      <h3>Log In</h3>
                  </div>
                  <div class="form-group">
-                     <input type="text" name="username" class="form-control" id="loginUsername" placeholder="Username">
+                     <input type="text" name="loginUsername" class="form-control" id="loginUsername" placeholder="Username">
                  </div>
                  <div class="form-group">
-                     <input type="password" name="password" class="form-control" id="loginPassword" placeHolder="Password">
+                     <input type="password" name="loginPassword" class="form-control" id="loginPassword" placeHolder="Password">
                  </div>
-                 <button type="submit" id="bLogin"class="btn btn-primary">Log In</button>
+                 <button type="submit" id="bLogin" name="bLogin" class="btn btn-primary">Log In</button>
              </form>
 
             </div>
@@ -28,22 +28,22 @@
                 <h3>Register</h3>
             </div>
             <div class="form-group">
-                <input id="registerUsername" name="username" class="form-control" placeholder="Username">
+                <input id="registerUsername" name="registerUsername" class="form-control" placeholder="Username">
                 <small id="usernameHelp" class="form-text text-muted">Username must be unique (not case sensitive)</small>
             </div>
             <div class="form-group">
-                <input id="registerFirstName" name="firstName" class="form-control" placeHolder="First name">
+                <input id="registerFirstName" name="registerFirstName" class="form-control" placeHolder="First name">
             </div>
             <div class="form-group">
-                <input id="registerLastName" name="lastName" class="form-control" placeHolder="Last name">
+                <input id="registerLastName" name="registerLastName" class="form-control" placeHolder="Last name">
             </div>
             <div class="form-group">
-                <input id="registerEmail" name="email" class="form-control" placeHolder="Email">
+                <input id="registerEmail" name="registerEmail" class="form-control" placeHolder="Email">
             </div>
             <div class="form-group">
-                <input id="registerPassword" type="password" class="form-control" name="password" placeholder="Password">
+                <input id="registerPassword" type="password" class="form-control" name="registerPassword" placeholder="Password">
             </div>
-            <button type="bRegister" class="btn btn-primary">Register</button>
+            <button type="bRegister" name ="bRegister" class="btn btn-primary">Register</button>
         </form>
             </div>
         </div>

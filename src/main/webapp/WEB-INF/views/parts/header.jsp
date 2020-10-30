@@ -41,7 +41,7 @@
                 <div class="col">
                     <div class="row">
                         <c:choose>
-                            <c:when test="${true != false}">
+                            <c:when test="${currentUser != null}">
                                 <div class="row">
                                     <div class="text-secondary">
                                             ${currentUser.username}
