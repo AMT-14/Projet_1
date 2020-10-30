@@ -44,9 +44,9 @@ public class RegisterCommandEndpoint extends HttpServlet {
 
         try {
             identityManagementFacade.register(registerCommand);
-            request.setAttribute("loginUsername", request.getParameter("registerUsername"));
+            /*request.setAttribute("loginUsername", request.getParameter("registerUsername"));
             request.setAttribute("loginPassword", request.getParameter("registerPassword"));
-            request.getRequestDispatcher("/login.do").forward(request, response);
+            request.getRequestDispatcher("/login.do").forward(request, response);*/
             return;
         } catch (RegistrationFailedException e) {
             request.getSession().setAttribute("errors", List.of(e.getMessage()));
