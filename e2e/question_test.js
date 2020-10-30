@@ -9,6 +9,6 @@ Scenario('Login and write a question', ({ I }) => {
     I.click('bLogin');
     I.seeCurrentUrlEquals('http://localhost:9080/questions');
     I.fillField('text','question 1 for test purpose');
-    I.click('bSumbitQuestion');
+    I.click('bSubmitQuestion');
     I.see('question 1 for test purpose');
 });
