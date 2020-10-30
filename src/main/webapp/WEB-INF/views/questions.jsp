@@ -37,7 +37,6 @@
                                     <input type="hidden" name="questionID" value="${questionID}">
                                     <input type="hidden" name="objectVoted" value="${questionID}">
                                     <input type="hidden" name="textType" value="${TextType.QUESTION}">
-                                    <input type="hidden" name="VoteID" value="${}">
                                     <input type="hidden" name="value" value="UP">
                                     <button type="submit"><i class="fa fa-caret-up"></i></button>
                                 </form>
@@ -46,7 +45,6 @@
                                     <input type="hidden" name="questionID" value="${questionID}">
                                     <input type="hidden" name="objectVoted" value="${questionID}">
                                     <input type="hidden" name="textType" value="${TextType.QUESTION}">
-                                    <input type="hidden" name="VoteID" value="${}">
                                     <input type="hidden" name="value" value="DOWN">
                                     <button type="submit"><i class="fa fa-caret-down"></i></button>
                                 </form>
