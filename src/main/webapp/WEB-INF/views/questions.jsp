@@ -27,7 +27,8 @@
                 <c:forEach var="question" items="${questions.questions}">
                     <tr>
                         <td>
-                            <div class="question text-black-50">${question.text}</div>
+                            <<div class="question text-black-50">${question.text}</div>>
+                            <a class="question text-black-50" href="/details.do"></a>
                             <div class="col">
                                 <form action="vote.do" method="post">
                                     <input type="hidden" name="questionID" value="${questionID}">
