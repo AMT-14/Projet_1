@@ -79,10 +79,10 @@ public class JdbcAnswerRepository implements IAnswerRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            String query = "UPDATE answer SET text=?, date=? WHERE answer_id LIKE ?";
+            String query = "UPDATE answer SET text = ?, date = ? WHERE answer_id LIKE ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, answer.getText());
-            ps.setString(2, answer.getDate().toString());
+            ps.setString(2, answer.getDate());
             ps.executeUpdate();
 
             ps.close();

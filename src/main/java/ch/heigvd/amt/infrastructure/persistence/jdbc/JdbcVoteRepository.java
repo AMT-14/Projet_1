@@ -203,7 +203,6 @@ public class JdbcVoteRepository implements IVoteRepository {
             String query = "UPDATE FROM vote SET value LIKE ? WHERE vote_id LIKE ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setBoolean(1, vote.getValue() == Vote.VoteValue.UP);
-            ps.setString(2, vote.getId().asString());
             ps.executeUpdate();
 
             ps.close();
