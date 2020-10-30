@@ -17,7 +17,7 @@
                  <div class="form-group">
                      <input type="password" name="loginPassword" class="form-control" id="loginPassword" placeHolder="Password">
                  </div>
-                 <button type="submit" id="bLogin"class="btn btn-primary">Log In</button>
+                 <button type="submit" id="bLogin" name="bLogin" class="btn btn-primary">Log In</button>
              </form>
 
             </div>
@@ -43,7 +43,7 @@
             <div class="form-group">
                 <input id="registerPassword" type="password" class="form-control" name="registerPassword" placeholder="Password">
             </div>
-            <button type="bRegister" class="btn btn-primary">Register</button>
+            <button type="bRegister" name ="bRegister" class="btn btn-primary">Register</button>
         </form>
             </div>
         </div>

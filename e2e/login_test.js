@@ -16,7 +16,7 @@ Scenario('Register', ({ I }) => {
     I.fillField('registerUsername','user1');
     I.fillField('registerFirstName','Jean');
     I.fillField('registerLastName','Dupont');
-    I.fillField('regitserEmail','jean@dupont.ch');
+    I.fillField('registerEmail','jean@dupont.ch');
     I.fillField('registerPassword','password1');
     I.click('bRegister'); 
     I.seeCurrentUrlEquals('http://localhost:9080/questions');
