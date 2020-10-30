@@ -35,7 +35,7 @@
                                     <input type="hidden" name="objectVotedType" value="question">
                                     <input type="hidden" name="voteID" value="">
                                     <input type="hidden" name="value" value="UP">
-                                    <button type="submit"><i class="arrowUP"></i></button>
+                                    <button type="submit">▲</i></button>
                                 </form>
                                 <!-- <span>${question.totalVotes}</span> -->
                                 <h5>0</h5>
@@ -45,7 +45,7 @@
                                     <input type="hidden" name="objectVotedType" value="question">
                                     <input type="hidden" name="voteID" value="">
                                     <input type="hidden" name="value" value="DOWN">
-                                    <button type="submit"><i class="arrowDOWN"></i></button>
+                                    <button type="submit">▼</i></button>
                                 </form>
                             </div>
                         </td>
