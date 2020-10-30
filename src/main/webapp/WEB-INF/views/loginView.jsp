@@ -1,14 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html>
-    <head>
-        <title>AMT-14-Project1 Login </title>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-    </head>
-    <body>
-    <jsp:include page="parts/header.jsp"/>
-    <div class="container-fluid bg-danger">
+<c:set var="pageTitle" value="Login"/>
+<%@include file="parts/header.jsp"%>
+    <div class="container-fluid ">
         <div class="row">
             <div class="col">
 
@@ -60,8 +55,7 @@
         </c:forEach>
     </div>
 
-    <jsp:include page="parts/footer.jsp"/>
-    </body>
-</html>
+<jsp:include page="parts/footer.jsp"/>
+
 
 

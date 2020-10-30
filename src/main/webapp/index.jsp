@@ -1,17 +1,20 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-    </head>
-    <body>
-    <jsp:include page="WEB-INF/views/parts/header.jsp"/>
-    <h2>Welcome to Project 1 !</h2>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="pageTitle" value="Home"/>
 
-    <div class="alert alert-dismissible alert-secondary bg-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Bonsoir Paris</strong> Ce lien <a href="#" class="alert-link">est inutile</a>.
+ <%@include file="/WEB-INF/views/parts/header.jsp"%>
+
+    <div class="h-100">
+        <div class="container bg-info">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Welcome to Project 1 !</h2>
+                </div>
+            </div>
+            <p>This page is just the landing page, use the navbar up top to go to actual pages ;)</p>
+        </div>
+
     </div>
 
-    <jsp:include page="WEB-INF/views/parts/footer.jsp"/>
-    </body>
-</html>
+
+ <jsp:include page="WEB-INF/views/parts/footer.jsp"/>
