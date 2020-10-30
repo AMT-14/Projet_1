@@ -35,8 +35,8 @@ public class LoginCommandEndpoint extends HttpServlet {
         CurrentUserDTO currentUser;
 
         LoginCommand command = LoginCommand.builder()
-                .username(request.getParameter("username"))
-                .clearTextPassword(request.getParameter("password"))
+                .username(request.getParameter("loginUsername"))
+                .clearTextPassword(request.getParameter("loginPassword"))
                 .build();
 
         try{
