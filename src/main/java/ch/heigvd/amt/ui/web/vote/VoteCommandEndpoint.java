@@ -53,7 +53,7 @@ public class VoteCommandEndpoint extends HttpServlet {
 
 
         if(request.getParameter("objectVotedType").equals("question")){
-            objectVoted = new QuestionId(questionID);
+            objectVoted =questionID;
             textType = TextType.QUESTION;
         }
         if(!(voteID.isEmpty())){
