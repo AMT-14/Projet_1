@@ -47,6 +47,7 @@ public class RegisterCommandEndpoint extends HttpServlet {
             /*request.setAttribute("loginUsername", request.getParameter("registerUsername"));
             request.setAttribute("loginPassword", request.getParameter("registerPassword"));
             request.getRequestDispatcher("/login.do").forward(request, response);*/
+            response.sendRedirect("/login");
             return;
         } catch (RegistrationFailedException e) {
             request.getSession().setAttribute("errors", List.of(e.getMessage()));
