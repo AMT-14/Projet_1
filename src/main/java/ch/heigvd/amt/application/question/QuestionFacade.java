@@ -2,7 +2,6 @@ package ch.heigvd.amt.application.question;
 
 import ch.heigvd.amt.domain.question.IQuestionRepository;
 import ch.heigvd.amt.domain.question.Question;
-import ch.heigvd.amt.domain.question.QuestionId;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +22,7 @@ public class QuestionFacade{
         questionRepository.save(submittedQuestion);
     }
 
-    public QuestionsDTO getQuestions(QuestionId query){
+    public QuestionsDTO getQuestions(QuestionsQuery query){
         Collection<Question> allQuestions = questionRepository.find(query);
 
         List<QuestionsDTO.QuestionDTO> allQuestionsDTO = allQuestions.stream().map(question -> QuestionsDTO.QuestionDTO.builder()

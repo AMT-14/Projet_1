@@ -36,7 +36,7 @@
                                     <input type="hidden" name="value" value="UP">
                                     <button type="submit"><i class="fas fa-arrow-up"></i></button>
                                 </form>
-                                <span>${question.totalVotes}</span>
+                                <!-- <span>${question.totalVotes}</span> -->
                                 <form action="vote.do" method="post">
                                     <input type="hidden" name="questionID" value="${questionID}">
                                     <input type="hidden" name="objectVoted" value="${questionID}">

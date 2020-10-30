@@ -19,7 +19,7 @@ package ch.heigvd.amt.ui.web.question;
         import javax.servlet.http.HttpServletResponse;
         import java.io.IOException;
 
-@WebServlet(name = "SubmitQuestionCommandHandler", urlPatterns = "/submitQuestion.do")
+@WebServlet(name = "SubmitQuestionCommandHandler", urlPatterns = "/questionVotesAndAnswer")
 public class QuestionVotesAndAnswersEndpoint extends HttpServlet {
 
     @Inject
@@ -45,12 +45,12 @@ public class QuestionVotesAndAnswersEndpoint extends HttpServlet {
         QuestionId questionId = new QuestionId(questionID);
 
 
-        QuestionsDTO questionDTO = questionFacade.getQuestions(questionId);
+//        QuestionsDTO questionDTO = questionFacade.getQuestions(questionId);
+//
+//        int totalVotes = voteFacade.getTotalVotes(questionId, TextType.QUESTION);
+//        questionDTO.totalVotes = totalVotes;
 
-        int totalVotes = voteFacade.getTotalVotes(questionId, TextType.QUESTION);
-        questionDTO.totalVotes = totalVotes;
-
-        request.setAttribute("question", questionDTO);
+//        request.setAttribute("question", questionDTO);
         response.sendRedirect("/questions");
     }
 }

@@ -1,5 +1,6 @@
 package ch.heigvd.amt.infrastructure.persistence.jdbc;
 
+import ch.heigvd.amt.application.question.QuestionsQuery;
 import ch.heigvd.amt.domain.question.IQuestionRepository;
 import ch.heigvd.amt.domain.question.Question;
 import ch.heigvd.amt.domain.question.QuestionId;
@@ -27,7 +28,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
     DataSource dataSource;
 
     @Override
-    public Collection<Question> find(QuestionId query) {
+    public Collection<Question> find(QuestionsQuery query) {
         if(query != null){
             return findAll().stream()
                     .filter(question -> question.getQuestionType() != QuestionType.NOT_SAFE_FOR_WORK)
