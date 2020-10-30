@@ -36,7 +36,7 @@ public class VoteCommandEndpoint extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         CurrentUserDTO currentUser = (CurrentUserDTO) request.getSession().getAttribute("currentUser");
-        String questionID = request.getParameter("questionID");
+        String questionID = request.getParameter("questionID").asString();
         String voteID = request.getParameter("voteID");
         String valueString = request.getParameter("value");
         Vote.VoteValue value = null;
@@ -53,7 +53,7 @@ public class VoteCommandEndpoint extends HttpServlet {
 
 
         if(request.getParameter("objectVotedType").equals("question")){
-            objectVoted =questionID;
+            objectVoted = questionID;
             textType = TextType.QUESTION;
         }
         if(!(voteID.isEmpty())){
