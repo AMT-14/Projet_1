@@ -23,7 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-@Named("JdbcUserRepository")
+@Named("JdbcVoteRepository")
 public class JdbcVoteRepository implements IVoteRepository {
 
     @Resource (lookup ="jdbc/DBProjet")
