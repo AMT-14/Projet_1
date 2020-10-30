@@ -3,7 +3,7 @@ name: build and publish Docker image
 
 on: 
   push:
-    branches: [ jdbc ]
+    branches: [ debugvote ]
 
 jobs: 
   build: 
