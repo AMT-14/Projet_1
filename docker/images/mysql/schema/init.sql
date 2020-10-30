@@ -31,4 +31,5 @@ voter_id VARCHAR(255) NOT NULL,
 value VARCHAR(255),
 FOREIGN KEY (voter_id) REFERENCES user(user_id)
 );
+INSERT INTO user(user_id, username, email, first_name, last_name, password) VALUES("123e4567-e89b-12d3-a456-556642440000", "test", "test", "test", "test", "test");
 
