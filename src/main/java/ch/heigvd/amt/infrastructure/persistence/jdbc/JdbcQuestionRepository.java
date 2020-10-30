@@ -86,9 +86,11 @@ public class JdbcQuestionRepository implements IQuestionRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            String query = "UPDATE question WHERE question_id LIKE ?";
+            String query = "UPDATE question SET question_type = ?, text = ? WHERE question_id LIKE ?";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, question.getId().asString());
+            ps.setString(1, question.getQuestionType().toString());
+            ps.setString(2, question.getText());
+
             ps.executeUpdate();
 
             ps.close();
