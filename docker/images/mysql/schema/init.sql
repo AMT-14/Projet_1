@@ -15,4 +15,20 @@ question_type VARCHAR(255),
 text LONGTEXT NOT NULL,
 FOREIGN KEY (author_id) REFERENCES user(user_id)
 );
+CREATE TABLE IF NOT EXISTS answer (
+answer_id VARCHAR(255) PRIMARY KEY,
+author_id VARCHAR(255) NOT NULL,
+question_id VARCHAR(255) NOT NULL, 
+date DATE,
+text LONGTEXT NOT NULL,
+FOREIGN KEY (author_id) REFERENCES user(user_id),
+FOREIGN KEY (question_id) REFERENCES question(question_id)
+);
+CREATE TABLE IF NOT EXISTS vote (
+vote_id VARCHAR(255) PRIMARY KEY,
+object_voted VARCHAR(255) NOT NULL,
+voter_id VARCHAR(255) NOT NULL,
+value VARCHAR(255),
+FOREIGN KEY (voter_id) REFERENCES user(user_id)
+);
 

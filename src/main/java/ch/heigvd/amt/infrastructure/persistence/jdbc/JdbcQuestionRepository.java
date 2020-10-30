@@ -50,7 +50,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
             ps.setString(1, entity.getId().asString());
             //ps.setRef(2, authorRef);
             ps.setString(2, entity.getAuthorId().asString());
-            ps.setString(3, entity.getQuestionType().toString());
+            ps.setString(3, entity.getQuestionType().name());
             ps.setString(4, entity.getText());
 
             ps.executeUpdate();
@@ -86,9 +86,11 @@ public class JdbcQuestionRepository implements IQuestionRepository {
         try {
             Connection conn = dataSource.getConnection();
 
-            String query = "UPDATE question WHERE question_id LIKE ?";
+            String query = "UPDATE question SET question_type = ?, text = ? WHERE question_id LIKE ?";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, question.getId().asString());
+            ps.setString(1, question.getQuestionType().name());
+            ps.setString(2, question.getText());
+
             ps.executeUpdate();
 
             ps.close();
@@ -117,7 +119,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
                 Question resultQuestion = Question.builder()
                         .id(new QuestionId(set.getString("question_id")))
                         .authorId(new UserId(set.getString("author_id")))
-                        .questionType((QuestionType) set.getObject("question_type"))
+                        .questionType(QuestionType.valueOf(set.getObject("question_type").toString()))
                         .text(set.getString("text")).build();
 
                 result = Optional.of(resultQuestion);
@@ -146,7 +148,7 @@ public class JdbcQuestionRepository implements IQuestionRepository {
                 Question nextQuestion = Question.builder()
                         .id(new QuestionId(set.getString("question_id")))
                         .authorId(new UserId(set.getString("author_id")))
-                        .questionType((QuestionType)set.getObject("question_type"))
+                        .questionType(QuestionType.valueOf(set.getObject("question_type").toString()))
                         .text(set.getString("text")).build();
 
                 result.add(nextQuestion);

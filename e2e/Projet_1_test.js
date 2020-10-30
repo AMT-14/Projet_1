@@ -1,8 +1,8 @@
 Feature('Projet_1');
 
 Scenario('Login user with valid credentials', ({ I }) => {
-    I.amOnPage('http://localhost:9080/Projet_1/login');
-    I.see('LOGIN Panel');
+    I.amOnPage('http://localhost:9080/login');
+    I.see('Log In');
    
 
 });
