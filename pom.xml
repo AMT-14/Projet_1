@@ -15,6 +15,10 @@
         <liberty.var.default.http.port>9080</liberty.var.default.http.port>
         <liberty.var.default.https.port>9443</liberty.var.default.https.port>
         <liberty.var.app.context.root>${project.artifactId}</liberty.var.app.context.root>
+        <openapi-generator-version>4.3.1</openapi-generator-version>
+        <gson-version>2.8.6</gson-version>
+        <gson-fire-version>1.8.4</gson-fire-version>
+        <okhttp-version>3.14.7</okhttp-version>
     </properties>
 
 
@@ -24,6 +28,16 @@
             <artifactId>lombok</artifactId>
             <version>1.18.10</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.gsonfire</groupId>
+            <artifactId>gson-fire</artifactId>
+            <version>${gson-fire-version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -38,6 +52,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp-version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.4.1</version>
@@ -48,6 +67,31 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator-version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>src/main/resources/api-spec.yaml</inputSpec>
+                            <language>java</language>
+                            <library>okhttp-gson</library>
+                            <configOptions>
+                                <sourceFolder>src/gen/java/main</sourceFolder>
+                                <basePackage>ch.heig.gamification</basePackage>
+                                <modelPackage>ch.heig.gamification.api.dto</modelPackage>
+                                <apiPackage>ch.heig.gamification.api</apiPackage>
+                                <dateLibrary>java11</dateLibrary>
+                            </configOptions>
+                            <output>target/generated-sources/openapi</output>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>

@@ -1,0 +1,246 @@
+openapi: '3.0.3'
+info:
+  version: '0.2.0'
+  title: Gamification
+  description: we're trying to make it work
+security:
+  # - bearerAuth: []
+  - apiKeyAuth: []
+paths:
+  /scoreScales:
+    post:
+      description: Register a score scale for a specifique api
+      operationId: createScoreScale
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/ScoreScale'
+      responses:
+        '201':
+          description: score scale created
+  /scoreScales/{id}:
+    get:
+      description: Get the score corresponding to the id for a specifique api
+      operationId: getScoreScale
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/ScoreScale'
+      responses:
+        '200':
+          description: scoreScale successfully provided
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ScoreScale'
+  /applications:
+    post:
+      description: register an application
+      operationId: registerApplication
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '200':
+          description: Application registered successfully
+          content:
+            'application/json':
+              schema:
+                type: UUID
+
+  /rules:
+    post:
+      description: create a new rule
+      operationId: createRule
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Rule'
+      responses:
+        '200':
+          description: new rule creation success
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Rule'
+
+
+  /events:
+    post:
+      description: register a new event
+      operationId: registerEvent
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '200':
+          description: Event registered successfully
+
+  /badge:
+    post:
+      description: Register a new badge for a specific API
+      operationId: createBadge
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Badge'
+      responses:
+        '201':
+          description: badge created
+
+  /badge/{id}:
+    get:
+      description: get the badge corresponding to the id for a specific API
+      operationId: getBadge
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Badge'
+      responses:
+        '200':
+          description: badge successfully provided
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Badge'
+
+  /users:
+    get:
+      description: get all users
+      operationId: getUsers
+      responses:
+        '200':
+          description: sucess
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+  /users/{id}:
+    get:
+      description: get one user, with inAppId
+      operationId: getUser
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/UserStat'
+
+
+components:
+  securitySchemes:
+    # bearerAuth:            # arbitrary name for the security scheme
+    #  type: http
+    #  scheme: bearer       # warning: it HAS TO be a lowercase b for the swagger ui version used in springfox
+    #  bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+  schemas:
+    Application:
+      type: object
+      properties:
+        name:
+          type: string
+    Rule:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        eventName:
+          type: string
+        badgeId:
+          type: string
+        scoreScaleId:
+          type: string
+        scoreDelta:
+          type: integer
+
+    ScoreScale:
+      type: object
+      properties:
+        name:
+          type: string
+    Badge:
+      type: object
+      properties:
+        name:
+          type: string
+    User:
+      type: object
+      properties:
+        inGamifiedAppUserId:
+          type: string
+    Event:
+      type: object
+      properties:
+        name:
+          type: string
+        inGamifiedAppUserId:
+          type: string
+        properties:
+          type: string
+    UserScore:
+      type: object
+      properties:
+        scoreName:
+          type: string
+        scoreValue:
+          type: int
+    UserStat:
+      type: object
+      properties:
+        user:
+          type: User
+        scores:
+          type : array
+          items:
+            $ref: '#components/schemas/UserScore'
+        badges:
+          type: array
+          items:
+            $ref: '#components/schemas/Badge'
+
