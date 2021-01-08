@@ -10,6 +10,18 @@ docker-compose up
 
 to get the app running, then you simply go to the following URL : localhost:9080/
 
+#### Running the GAMIFIED App
+
+Inside the project folder, make sure you are up to date, then you can type
+```
+docker-compose pull
+docker-compose up -d database_gamification database
+# wait a bit
+docker-compose up
+```
+
+to get the app running, then you simply go to the following URL : localhost:9080/
+
 #### Stuff added since presentation
 
 - filter no longer blocks CSS
