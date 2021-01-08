@@ -23,8 +23,8 @@ services:
       - '7777:7777'
     links:
       - "database:db"
-#    volumes:
-#    - ../src/main/liberty/config/server.xml:/config/server.xml
+    volumes:
+    - ../src/main/liberty/config/server.xml:/config/server.xml
     depends_on:
       - api_gamification
       - database
