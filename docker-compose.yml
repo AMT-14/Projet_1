@@ -23,6 +23,11 @@ services:
       - '7777:7777'
     links:
       - "database:db"
+#    volumes:
+#    - ../src/main/liberty/config/server.xml:/config/server.xml
+    depends_on:
+      - api_gamification
+      - database
 
   database_gamification:
     image: mysql:8.0.21
@@ -37,10 +42,15 @@ services:
       - '3305:3306'
 
   api_gamification:
+    container_name: api_gamification
     image: ghcr.io/amt-14/gamificationapi_image:latest
-      ports:
-        - '8088:8080'
-      depends_on:
-        - database
-      environment:
-        MYSQL_HOST: 'database_gamification'
+    ports:
+      - '8088:8080'
+    depends_on:
+      - database_gamification
+    environment:
+      MYSQL_HOST: 'database_gamification'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_PORT: 3306
+      MYSQL_USER: 'APIUser'
+      MYSQL_DATABASE: 'database_gamification'
