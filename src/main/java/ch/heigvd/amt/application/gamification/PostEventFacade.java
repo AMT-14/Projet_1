@@ -56,8 +56,13 @@ public class PostEventFacade {
     }
 
     public void PostEvent(String userId, EventType eventType, ApiCallback<Void> callback) throws ApiException{
-//        Event newEvent = new Event(eventType.name, userId, "propertiesString");
-//        api.registerEventAsync(newEvent, callback);
+//        Event event = new Event(, userId, "propertiesString");
+        Event event = new Event()
+                .name(eventType.name)
+                .inGamifiedAppUserId(userId)
+                //.creationDateTime(Date.from(Instant.now()))
+                .properties("propertiesString");
+        api.registerEventAsync(event, callback);
 
     }
 
