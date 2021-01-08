@@ -37,7 +37,7 @@ services:
       MYSQL_USER: 'APIUser'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
-      MYSQL_DATABASE: 'database_gamification'
+      MYSQL_DATABASE: 'DBProjet2'
     ports:
       - '3305:3306'
 
