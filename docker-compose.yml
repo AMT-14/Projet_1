@@ -23,3 +23,24 @@ services:
       - '7777:7777'
     links:
       - "database:db"
+
+  database_gamification:
+    image: mysql:8.0.21
+    container_name: db_gamification
+    restart: always
+    environment:
+      MYSQL_USER: 'APIUser'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: 'database_gamification'
+    ports:
+      - '3305:3306'
+
+  api_gamification:
+    image: ghcr.io/amt-14/gamificationapi_image:latest
+      ports:
+        - '8088:8080'
+      depends_on:
+        - database
+      environment:
+        MYSQL_HOST: 'database_gamification'
