@@ -56,8 +56,8 @@ public class PostEventFacade {
     }
 
     public void PostEvent(String userId, EventType eventType, ApiCallback<Void> callback) throws ApiException{
-        Event newEvent = new Event(eventType.name, userId, "propertiesString");
-        api.registerEventAsync(newEvent, callback);
+//        Event newEvent = new Event(eventType.name, userId, "propertiesString");
+//        api.registerEventAsync(newEvent, callback);
 
     }
 
