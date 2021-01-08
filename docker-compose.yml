@@ -51,6 +51,7 @@ services:
     environment:
       MYSQL_HOST: 'database_gamification'
       MYSQL_PASSWORD: 'password'
-      MYSQL_PORT: 3306
+      MYSQL_PORT: 3305
       MYSQL_USER: 'APIUser'
       MYSQL_DATABASE: 'database_gamification'
+    command: bash -c "./wait-for-it.sh --timeout0 localhost:3305"
