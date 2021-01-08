@@ -24,7 +24,7 @@ services:
     links:
       - "database:db"
     volumes:
-    - ../src/main/liberty/config/server.xml:/config/server.xml
+    - ./src/main/liberty/config/server.xml:/config/server.xml
     depends_on:
       - api_gamification
       - database
