@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet(name= "VoteCommandServlet", urlPatterns = "/vote.do")
 public class VoteCommandEndpoint extends HttpServlet {
@@ -54,6 +55,7 @@ public class VoteCommandEndpoint extends HttpServlet {
 
         if(request.getParameter("objectVotedType").equals("question")){
             objectVoted = new QuestionId(questionID);
+            System.out.println(objectVoted + " in VoteCommandEndpoint");
             textType = TextType.QUESTION;
         }
         if(!(voteID.isEmpty())){

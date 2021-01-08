@@ -14,7 +14,6 @@ public abstract class Id {
     }
 
     public Id(String id) {
-
         this.id = UUID.fromString(id);
     }
 
