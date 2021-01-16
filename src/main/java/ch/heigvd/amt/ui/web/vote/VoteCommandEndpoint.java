@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet(name= "VoteCommandServlet", urlPatterns = "/vote.do")
 public class VoteCommandEndpoint extends HttpServlet {
@@ -57,7 +58,7 @@ public class VoteCommandEndpoint extends HttpServlet {
             textType = TextType.QUESTION;
         }
         if(!(voteID.isEmpty())){
-            vote = facade.getVote(new VoteId(voteID), textType);
+            vote = facade.getVote(new VoteId(voteID), currentUser.getId());
         }
 
         if(vote == null){
@@ -70,6 +71,8 @@ public class VoteCommandEndpoint extends HttpServlet {
             facade.vote(command);
         } else {
             // update existing vote
+            //first look if we already voted
+            /*
             if(value != vote.getValue()){
                 facade.modifyVote(VoteUpdateCommand.builder()
                         .id(new VoteId(voteID))
@@ -80,7 +83,7 @@ public class VoteCommandEndpoint extends HttpServlet {
             } else {
                 // vote where identical, remove one
                 facade.removeVote(new VoteId(vote.getId()));
-            }
+            }*/
         }
 
         response.sendRedirect(request.getContextPath() + "/questions?questionID=" + questionID);

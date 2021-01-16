@@ -38,7 +38,7 @@ public class ServiceRegistry{
 
     @PostConstruct
     public void init() {
-        questionFacade = new QuestionFacade(questionRepository);
+        questionFacade = new QuestionFacade(questionRepository, voteRepository);
         identityManagementFacade = new IdentityManagementFacade(userRepository);
         voteFacade = new VoteFacade(voteRepository);
         answerFacade = new AnswerFacade((answerRepository));

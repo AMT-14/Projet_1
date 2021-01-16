@@ -17,9 +17,10 @@ public class VoteFacade {
         this.repository = repository;
     }
 
-    public VoteDTO getVote(VoteId id, TextType textType){
+    public VoteDTO getVote(VoteId id, UserId voterId){
 
-        Optional<Vote> vote = repository.getVote(id, textType);
+
+        Optional<Vote> vote = repository.getVote(id, voterId);
 
         return vote.map(value -> VoteDTO.builder()
             .id(value.getId().asString())
@@ -29,8 +30,8 @@ public class VoteFacade {
     }
 
     public VoteDTO getVote(Id id, UserId uid, TextType textType){
-
         Optional<Vote> vote = repository.getVote(id, uid, textType);
+
 
         return vote.map(value -> VoteDTO.builder()
                 .id(value.getId().asString())
