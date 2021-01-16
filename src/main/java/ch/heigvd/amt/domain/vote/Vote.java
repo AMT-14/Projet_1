@@ -14,6 +14,9 @@ public class Vote implements IEntity<Vote, VoteId> {
     private UserId voter;
     private VoteValue value;
 
+    public String printVote() {
+        return objectVoted.asString();
+    }
     public enum VoteValue{
         DOWN,
         UP

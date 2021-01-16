@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface IVoteRepository extends IRepository<Vote, VoteId> {
     int totalVotes(Id id, TextType textType);
     Optional<Vote> getVote(Id id, UserId uid, TextType textType);
-    Optional<Vote> getVote(VoteId id, TextType textType);
+    Optional<Vote> getVote(VoteId id, UserId voterId);
 }

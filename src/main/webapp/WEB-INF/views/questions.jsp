@@ -38,7 +38,7 @@
                                     <button type="submit">arrow up</button>
                                 </form>
 
-                                <span>${question.totalVotes}</span>
+                                <span>${question.getTotalVotes()}</span>
                                 <form action="vote.do" method="post">
                                     <input type="hidden" name="questionID" value="${question.id}">
                                     <input type="hidden" name="textType" value="${TextType.QUESTION}">

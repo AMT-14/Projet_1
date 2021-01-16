@@ -46,15 +46,17 @@ public class JdbcVoteRepository implements IVoteRepository {
     @Override
     public int totalVotes(Id id, TextType textType) {
         int total = 0;
+        System.out.println(id + " in jdbc vote repo");
+
 
         try {
             Connection conn = dataSource.getConnection();
 
             String query;
             if(textType.equals(TextType.QUESTION)){
-                query = "SELECT totalVotes FROM question WHERE question_id LIKE ?";
+                query = "select * from vote where object_voted like ?";
             } else if(textType.equals(TextType.ANSWER)) {
-                query = "SELECT totalVotes FROM answer WHERE question_id LIKE ?";
+                query = "select * from vote where object_voted like ?";
             } else {
                 query = "error";
             }
@@ -63,8 +65,16 @@ public class JdbcVoteRepository implements IVoteRepository {
             ps.setString(1, id.asString());
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()){
-                total = rs.getInt(1);
+            while(rs.next()){
+                if(rs.getBoolean("value")) {
+                    total++;
+                } else {
+                    total--;
+                }
+            }
+            if (rs.last()) {
+                total = rs.getRow();
+                rs.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
             }
 
             ps.close();
@@ -73,6 +83,7 @@ public class JdbcVoteRepository implements IVoteRepository {
         } catch (SQLException throwables) {
             Logger.getLogger(JdbcVoteRepository.class.getName()).log(Level.SEVERE, null, throwables);
         }
+        System.out.println("total de vote" + total);
         return total;
     }
 
@@ -115,17 +126,24 @@ public class JdbcVoteRepository implements IVoteRepository {
     }
 
     @Override
-    public Optional<Vote> getVote(VoteId id, TextType textType) {
+    public Optional<Vote> getVote(VoteId id, UserId voterId) {
         Optional<Vote> vote = Optional.empty();
+        System.out.println(id + " in jdbc vote repo");
+
         try {
             Connection conn = dataSource.getConnection();
 
-            String query="SELECT * FROM vote WHERE id LIKE ? ";
+            String query="SELECT * FROM vote WHERE id LIKE ? AND voter_id LIKE ? ";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, id.asString());
+            ps.setString(2, voterId.asString());
             ResultSet rs = ps.executeQuery();
 
             Collection<Vote> votes = new LinkedList<>();
+            while(rs.next()) {
+                votes.add(resultSetVoted(rs, new QuestionId((rs.getString("author_id")))));
+            }
+            /*
             if(textType.equals(TextType.QUESTION)){
                 while(rs.next()){
                     votes.add(resultSetVoted(rs, new QuestionId(rs.getString("author_id"))));
@@ -134,7 +152,9 @@ public class JdbcVoteRepository implements IVoteRepository {
                 while(rs.next()){
 //                    votes.add(resultSetVoted(rs, new AnswerId(rs.getString("author_id"))));
                 }
-            }
+            }*/
+
+
 
             if(votes.size() == 1){
                 vote = votes.stream().findFirst();
@@ -155,9 +175,8 @@ public class JdbcVoteRepository implements IVoteRepository {
     public void save(Vote vote) {
 
         try {
-
             Connection conn = dataSource.getConnection();
-            String query = "INSERT INTO vote (vote_id, objectVoted, voter, value)"
+            String query = "INSERT INTO vote (vote_id, object_voted, voter_id, value)"
                     + " VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, vote.getId().asString());

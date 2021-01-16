@@ -55,11 +55,10 @@ public class VoteCommandEndpoint extends HttpServlet {
 
         if(request.getParameter("objectVotedType").equals("question")){
             objectVoted = new QuestionId(questionID);
-            System.out.println(objectVoted + " in VoteCommandEndpoint");
             textType = TextType.QUESTION;
         }
         if(!(voteID.isEmpty())){
-            vote = facade.getVote(new VoteId(voteID), textType);
+            vote = facade.getVote(new VoteId(voteID), currentUser.getId());
         }
 
         if(vote == null){
@@ -72,6 +71,8 @@ public class VoteCommandEndpoint extends HttpServlet {
             facade.vote(command);
         } else {
             // update existing vote
+            //first look if we already voted
+            /*
             if(value != vote.getValue()){
                 facade.modifyVote(VoteUpdateCommand.builder()
                         .id(new VoteId(voteID))
@@ -82,7 +83,7 @@ public class VoteCommandEndpoint extends HttpServlet {
             } else {
                 // vote where identical, remove one
                 facade.removeVote(new VoteId(vote.getId()));
-            }
+            }*/
         }
 
         response.sendRedirect(request.getContextPath() + "/questions?questionID=" + questionID);

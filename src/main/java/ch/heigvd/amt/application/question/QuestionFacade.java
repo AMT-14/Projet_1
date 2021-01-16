@@ -2,15 +2,20 @@ package ch.heigvd.amt.application.question;
 
 import ch.heigvd.amt.domain.question.IQuestionRepository;
 import ch.heigvd.amt.domain.question.Question;
+import ch.heigvd.amt.domain.vote.IVoteRepository;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuestionFacade{
+    private IVoteRepository voteRepository;
     private IQuestionRepository questionRepository;
 
-    public QuestionFacade(IQuestionRepository questionRepository){this.questionRepository = questionRepository;}
+    public QuestionFacade(IQuestionRepository questionRepository, IVoteRepository voteRepository){
+        this.questionRepository = questionRepository;
+        this.voteRepository = voteRepository;
+    }
 
     public void proposeQuestion(ProposeQuestionCommand command){
         Question submittedQuestion = Question.builder()
@@ -30,6 +35,12 @@ public class QuestionFacade{
             .text(question.getText())
             .author(question.getAuthorId().asString())
             .build()).collect(Collectors.toList());
+
+        for(QuestionsDTO.QuestionDTO question : allQuestionsDTO) {
+            question.updateTotalVotes(voteRepository);
+        }
+
+
 
         return QuestionsDTO.builder()
                 .questions(allQuestionsDTO)
