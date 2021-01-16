@@ -25,6 +25,7 @@ public class QuestionFacade{
                 .questionType(command.getType())
                 .build();
         questionRepository.save(submittedQuestion);
+        // TODO HERE call postEvent
     }
 
     public QuestionsDTO getQuestions(QuestionsQuery query){
