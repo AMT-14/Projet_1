@@ -2,6 +2,7 @@ package ch.heigvd.amt.infrastructure.persistence.jdbc;
 
 import ch.heigvd.amt.domain.Id;
 import ch.heigvd.amt.domain.TextType;
+import ch.heigvd.amt.domain.answer.AnswerId;
 import ch.heigvd.amt.domain.question.QuestionId;
 import ch.heigvd.amt.domain.user.IUserRepository;
 import ch.heigvd.amt.domain.user.User;
@@ -46,7 +47,6 @@ public class JdbcVoteRepository implements IVoteRepository {
     @Override
     public int totalVotes(Id id, TextType textType) {
         int total = 0;
-        System.out.println(id + " in jdbc vote repo");
 
 
         try {
@@ -72,10 +72,6 @@ public class JdbcVoteRepository implements IVoteRepository {
                     total--;
                 }
             }
-            if (rs.last()) {
-                total = rs.getRow();
-                rs.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
-            }
 
             ps.close();
             conn.close();
@@ -83,7 +79,6 @@ public class JdbcVoteRepository implements IVoteRepository {
         } catch (SQLException throwables) {
             Logger.getLogger(JdbcVoteRepository.class.getName()).log(Level.SEVERE, null, throwables);
         }
-        System.out.println("total de vote" + total);
         return total;
     }
 
@@ -106,7 +101,7 @@ public class JdbcVoteRepository implements IVoteRepository {
                 }
             } else if(textType.equals(TextType.ANSWER)) {
                 while(rs.next()){
-//                    votes.add(resultSetVoted(rs, new AnswerId(rs.getString("author_id"))));
+                    votes.add(resultSetVoted(rs, new AnswerId(rs.getString("author_id"))));
                 }
             }
 
