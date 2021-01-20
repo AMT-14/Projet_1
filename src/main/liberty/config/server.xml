@@ -18,7 +18,7 @@
     <dataSource jndiName="jdbc/DBProjet">
         <jdbcDriver libraryRef="MySqlLib"/>
         <properties databaseName="DBProjet1"
-                    serverName="${MYSQL_HOST}" portNumber="3306"
+                    serverName=${MYSQL_HOST} portNumber="3306"
                     user="U" password="password"/>
     </dataSource>
 
