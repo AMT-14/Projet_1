@@ -23,11 +23,16 @@ services:
       - '7777:7777'
     links:
       - "database:db"
-    volumes:
-    - ./src/main/liberty/config/server.xml:/config/server.xml
+
     depends_on:
       - api_gamification
       - database
+    environment:
+      MYSQL_HOST: 'database'
+      MYSQL_DATABASE: 'DBProjet1'
+      MYSQL_USER: 'U'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
 
   database_gamification:
     image: mysql:8.0.21
