@@ -1,4 +1,5 @@
 <server description="Sample Liberty server">
+    <variable name="MYSQL_HOST" value="localhost" />
     <featureManager>
         <feature>webProfile-8.0</feature>
     </featureManager>
@@ -17,7 +18,7 @@
     <dataSource jndiName="jdbc/DBProjet">
         <jdbcDriver libraryRef="MySqlLib"/>
         <properties databaseName="DBProjet1"
-                    serverName=${MYSQL_HOST:localhost} portNumber="3306"
+                    serverName="${MYSQL_HOST}" portNumber="3306"
                     user="U" password="password"/>
     </dataSource>
 
