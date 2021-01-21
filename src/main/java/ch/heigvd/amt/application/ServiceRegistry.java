@@ -41,11 +41,11 @@ public class ServiceRegistry{
 
     @PostConstruct
     public void init() throws IOException {
+        gamificationFacade = new GamificationFacade();
         questionFacade = new QuestionFacade(questionRepository, voteRepository);
         identityManagementFacade = new IdentityManagementFacade(userRepository);
         voteFacade = new VoteFacade(voteRepository, gamificationFacade);
         answerFacade = new AnswerFacade(answerRepository);
-        gamificationFacade = new GamificationFacade();
     }
 
     public GamificationFacade getPostEventFacade() {
