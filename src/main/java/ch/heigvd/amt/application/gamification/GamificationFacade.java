@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.TimeZone;
 
-public class PostEventFacade {
+public class GamificationFacade {
 
     private DefaultApi api;
 
@@ -38,11 +38,11 @@ public class PostEventFacade {
 
 
 
-    public PostEventFacade() throws IOException {
+    public GamificationFacade() throws IOException {
         Properties properties = new Properties();
         properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
-        String url = properties.getProperty("ch.heig.gamification.server.url");
-        api = api = new DefaultApi();
+        String url = properties.getProperty("ch.heig.gamification.api.url");
+        api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 
