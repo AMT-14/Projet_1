@@ -28,6 +28,8 @@ services:
     depends_on:
       - api_gamification
       - database
+    environment:
+      API_KEY: 'e02dd210-3638-41dc-9682-2c4dce37e84f'
 
   database_gamification:
     image: mysql:8.0.21
@@ -45,7 +47,7 @@ services:
     container_name: api_gamification
     image: ghcr.io/amt-14/gamificationapi_image:latest
     ports:
-      - '8088:8080'
+      - '8080:8080'
     depends_on:
       - database_gamification
     environment:
