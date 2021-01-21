@@ -1,5 +1,8 @@
 package ch.heigvd.amt.application.vote;
 
+import ch.heig.gamification.ApiException;
+import ch.heigvd.amt.application.gamification.EventType;
+import ch.heigvd.amt.application.gamification.GamificationFacade;
 import ch.heigvd.amt.domain.Id;
 import ch.heigvd.amt.domain.TextType;
 import ch.heigvd.amt.domain.question.QuestionId;
@@ -8,13 +11,16 @@ import ch.heigvd.amt.domain.vote.IVoteRepository;
 import ch.heigvd.amt.domain.vote.Vote;
 import ch.heigvd.amt.domain.vote.VoteId;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class VoteFacade {
     private IVoteRepository repository;
+    private GamificationFacade gamificationFacade;
 
-    public VoteFacade(IVoteRepository repository){
+    public VoteFacade(IVoteRepository repository, GamificationFacade gamificationFacade) {
         this.repository = repository;
+        this.gamificationFacade = gamificationFacade;
     }
 
     public VoteDTO getVote(VoteId id, UserId voterId){
@@ -40,13 +46,17 @@ public class VoteFacade {
                 .orElse(null);
     }
 
-    public void vote(VoteCommand command){
+    public void vote(VoteCommand command) throws ApiException {
         Vote vote = Vote.builder()
                 .voter(command.getVoter())
                 .objectVoted(command.getObjectVoted())
                 .value(command.getValue())
                 .build();
-
+        if(vote.getValue() == Vote.VoteValue.UP) {
+            gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_FIRST_UP_VOTE, null);
+        } else {
+            gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_FIRST_DOWN_VOTE, null);
+        }
         repository.save(vote);
     }
 

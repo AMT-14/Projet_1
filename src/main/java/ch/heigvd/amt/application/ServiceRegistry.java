@@ -43,8 +43,8 @@ public class ServiceRegistry{
     public void init() throws IOException {
         questionFacade = new QuestionFacade(questionRepository, voteRepository);
         identityManagementFacade = new IdentityManagementFacade(userRepository);
-        voteFacade = new VoteFacade(voteRepository);
-        answerFacade = new AnswerFacade((answerRepository));
+        voteFacade = new VoteFacade(voteRepository, gamificationFacade);
+        answerFacade = new AnswerFacade(answerRepository);
         gamificationFacade = new GamificationFacade();
     }
 

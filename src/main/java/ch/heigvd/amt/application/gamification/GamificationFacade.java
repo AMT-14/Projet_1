@@ -8,6 +8,8 @@ import ch.heig.gamification.api.dto.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.TimeZone;
@@ -38,10 +40,22 @@ public class GamificationFacade {
 
 
 
+    private void getApiKey() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("api-key.txt"));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        reader.close();
+
+        apiKey = stringBuilder.toString();
+    }
     public GamificationFacade() throws IOException {
+        getApiKey();
         Properties properties = new Properties();
         properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
-        String url = properties.getProperty("ch.heig.gamification.api.url");
+        String url = properties.getProperty("ch.heig.gamification.server.url");
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
