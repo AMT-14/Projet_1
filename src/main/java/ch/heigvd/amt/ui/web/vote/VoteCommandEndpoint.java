@@ -1,5 +1,6 @@
 package ch.heigvd.amt.ui.web.vote;
 
+import ch.heig.gamification.ApiException;
 import ch.heigvd.amt.application.ServiceRegistry;
 import ch.heigvd.amt.application.identitymng.authenticate.CurrentUserDTO;
 import ch.heigvd.amt.application.vote.VoteCommand;
@@ -35,7 +36,7 @@ public class VoteCommandEndpoint extends HttpServlet {
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CurrentUserDTO currentUser = (CurrentUserDTO) request.getSession().getAttribute("currentUser");
         String questionID = request.getParameter("questionID");
         String voteID = request.getParameter("voteID");

@@ -11,6 +11,7 @@ import ch.heigvd.amt.domain.vote.IVoteRepository;
 import ch.heigvd.amt.domain.vote.Vote;
 import ch.heigvd.amt.domain.vote.VoteId;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -46,16 +47,20 @@ public class VoteFacade {
                 .orElse(null);
     }
 
-    public void vote(VoteCommand command) throws ApiException {
+    public void vote(VoteCommand command) {
         Vote vote = Vote.builder()
                 .voter(command.getVoter())
                 .objectVoted(command.getObjectVoted())
                 .value(command.getValue())
                 .build();
-        if(vote.getValue() == Vote.VoteValue.UP) {
-            gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_FIRST_UP_VOTE, null);
-        } else {
-            gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_FIRST_DOWN_VOTE, null);
+        try {
+            if (vote.getValue() == Vote.VoteValue.UP) {
+                gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_FIRST_UP_VOTE, null);
+            } else {
+                gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_FIRST_DOWN_VOTE, null);
+            }
+        } catch (ApiException e) {
+            System.out.println("Unable to post neither up vote nor down vote to the gamification api :\n" + e.getMessage());
         }
         repository.save(vote);
     }
