@@ -54,7 +54,7 @@ public class GamificationFacade {
     public GamificationFacade() throws IOException {
         getApiKey();
         Properties properties = new Properties();
-        properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
+        //properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
         String url = properties.getProperty("ch.heig.gamification.server.url");
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
