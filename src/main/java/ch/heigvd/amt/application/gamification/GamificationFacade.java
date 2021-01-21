@@ -41,15 +41,15 @@ public class GamificationFacade {
 
 
     private void getApiKey() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("api-key.txt"));
+        /*BufferedReader reader = new BufferedReader(new FileReader("api-key.txt"));
         StringBuilder stringBuilder = new StringBuilder();
         String line = null;
         while ((line = reader.readLine()) != null) {
             stringBuilder.append(line);
         }
-        reader.close();
+        reader.close();*/
 
-        apiKey = stringBuilder.toString();
+        apiKey = System.getProperty("API_KEY");//stringBuilder.toString();
     }
     public GamificationFacade() throws IOException {
         getApiKey();
