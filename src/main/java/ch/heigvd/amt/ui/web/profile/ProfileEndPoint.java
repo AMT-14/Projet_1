@@ -30,27 +30,20 @@ public class ProfileEndPoint extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // ici faire du schmilblick pour get les userStats? attendre de pouvoir lancer l'api (docker-compose working?)
-        // VOIR COMMENT ON GARDE DANS L'APPLI LE USER PSEUDO? UserStat userStats = postEventFacade.getApi().getUser(ACOMPLETER(STRING))
+        
         CurrentUserDTO user = (CurrentUserDTO) request.getSession().getAttribute("currentUser");
+        String badgeAttribute = "No badge earned yet";
+        String scoreAttribute = "Scored nothing yet";
         try {
             UserStat userStats = gamificationFacade.getUserStats(user.getId().toString());
-            String badgeAttribute = "No badge earned yet";
-            String scoreAttribute = "Scored nothing yet";
-            System.out.println("******************************* userStats : " + userStats);
-            if(userStats != null && userStats.getBadges() != null) {
-                badgeAttribute = userStats.getBadges().toString();
-            }
-            if(userStats != null && userStats.getScores() != null){
-               scoreAttribute = userStats.getScores().toString();
-            }
-            System.out.println("******************************* badgeAttribut : " + badgeAttribute);
-            System.out.println("******************************* scoresAttribut : " + scoreAttribute);
-            request.setAttribute("userBadges", badgeAttribute);
-            request.setAttribute("userScores", scoreAttribute);
+            badgeAttribute = userStats.getBadges().toString();
+            scoreAttribute = userStats.getScores().toString();
         } catch (ApiException e) {
-            e.printStackTrace();
+            System.out.println("No user found");
         }
+
+        request.setAttribute("userBadges", badgeAttribute);
+        request.setAttribute("userScores", scoreAttribute);
 
         request.getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(request, response);
     }
