@@ -10,7 +10,8 @@ Launch the dbs by typing :
 ```
 docker-compose up database database_gamification
 ```
-database is the database for the main application\s\s
+database is the database for the main application
+
 database_gamification is the database for the gamified app
 
 Launch now the gamified app :
@@ -18,7 +19,8 @@ Launch now the gamified app :
 docker-compose up api
 ```
 
-If you already made this step skip to the next one.\s\s
+If you already made this step skip to the next one.
+
 Register the application and create badges, score scales and rules by executing the script appRegistration.sh
 ```
 ./appRegistration.sh

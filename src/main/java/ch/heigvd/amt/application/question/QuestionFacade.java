@@ -1,6 +1,5 @@
 package ch.heigvd.amt.application.question;
 
-import ch.heig.gamification.ApiException;
 import ch.heigvd.amt.application.gamification.EventType;
 import ch.heigvd.amt.application.gamification.GamificationFacade;
 import ch.heigvd.amt.domain.question.IQuestionRepository;

@@ -2,7 +2,6 @@ package ch.heigvd.amt.ui.web.profile;
 
 import ch.heig.gamification.ApiException;
 import ch.heig.gamification.api.dto.Badge;
-import ch.heig.gamification.api.dto.ScoreScale;
 import ch.heig.gamification.api.dto.UserScore;
 import ch.heig.gamification.api.dto.UserStat;
 import ch.heigvd.amt.application.ServiceRegistry;
