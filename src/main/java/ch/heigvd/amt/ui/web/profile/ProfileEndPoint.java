@@ -34,8 +34,9 @@ public class ProfileEndPoint extends HttpServlet {
         // VOIR COMMENT ON GARDE DANS L'APPLI LE USER PSEUDO? UserStat userStats = postEventFacade.getApi().getUser(ACOMPLETER(STRING))
         CurrentUserDTO user = (CurrentUserDTO) request.getSession().getAttribute("currentUser");
         try {
-            UserStat userStats = gamificationFacade.getUserStats(user.getId().asString());
-            System.out.println(userStats.toString());
+            System.out.println("****************************CurrentUserDTO : " + user.getId().toString());
+            UserStat userStats = gamificationFacade.getUserStats(user.getId().toString());
+            System.out.println("****************************userStats : " + userStats.toString());
             request.setAttribute("userStats", userStats);
         } catch (ApiException e) {
             e.printStackTrace();
