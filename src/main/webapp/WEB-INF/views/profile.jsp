@@ -10,16 +10,20 @@
     <h2>
         Badges
     </h2>
+    <tr>
     <c:foreach var="userBadge" items="${userStats.badges}">
-        ${userBadge.name}
+        <tr>
+                ${userBadge.name}
+        </tr>
     </c:foreach>
+    </tr>
 </div>
 <div>
     <h2>
         score
     </h2>
     <c:foreach var="userScore" items="${userStats.scores}">
-        ${userBadge.name}
+        ${userScore.name}
     </c:foreach>
 </div>
 
