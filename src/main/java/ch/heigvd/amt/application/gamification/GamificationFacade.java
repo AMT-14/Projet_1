@@ -54,7 +54,7 @@ public class GamificationFacade {
     public GamificationFacade() throws IOException {
         //Properties properties = new Properties();
         //properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
-        String url = "ch.heig.gamification.server.url"
+        String url = "ch.heig.gamification.server.url";
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
