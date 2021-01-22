@@ -40,6 +40,7 @@ public class GamificationFacade {
 
 
 
+
     private void retrieveApiKey() throws IOException {
         apiKey = System.getenv("API_KEY");
     }
@@ -50,20 +51,11 @@ public class GamificationFacade {
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        System.out.println("API key : " + this.getApiKey());
         api.getApiClient().addDefaultHeader("X-API-KEY", this.getApiKey());
-
-//        String application_name = properties.getProperty("ch.heig.gamification.app.name");
-//        try{
-//            api.getApiClient().setApiKey(api.getApplication(application_name).getApiKey());
-//        } catch (ApiException e){
-//            e.printStackTrace();
-//        }
 
     }
 
     public void PostEvent(String userId, EventType eventType, ApiCallback<Void> callback) throws ApiException{
-//        Event event = new Event(, userId, "propertiesString");
         Event event = new Event()
                 .name(eventType.name)
                 .inGamifiedAppUserId(userId)

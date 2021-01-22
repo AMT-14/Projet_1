@@ -4,9 +4,9 @@ API_KEY=$(curl -X POST "http://localhost:8080/applications" -H "Content-Type: ap
 printf %s "API_KEY=$API_KEY" > app.env
 
 
-curl -X POST "http://localhost:8080/badges" -H "X-API-KEY: ${API_KEY}" -H "Content-Type: application/json" -d "{\"name\":\"badgeFirstDownVote\"}"
-curl -X POST "http://localhost:8080/badges" -H "X-API-KEY: ${API_KEY}" -H "Content-Type: application/json" -d "{\"name\":\"badgeFirstQuestion\"}"
-curl -X POST "http://localhost:8080/badges" -H "X-API-KEY: ${API_KEY}" -H "Content-Type: application/json" -d "{\"name\":\"badgeFirstUpVote\"}"
+curl -X POST "http://localhost:8080/badges" -H "X-API-KEY: ${API_KEY}" -H "Content-Type: application/json" -d "{\"name\":\"First DownVote\"}"
+curl -X POST "http://localhost:8080/badges" -H "X-API-KEY: ${API_KEY}" -H "Content-Type: application/json" -d "{\"name\":\"First Question\"}"
+curl -X POST "http://localhost:8080/badges" -H "X-API-KEY: ${API_KEY}" -H "Content-Type: application/json" -d "{\"name\":\"First UpVote\"}"
 
 curl -X POST "http://localhost:8080/scoreScales" -H "X-API-KEY: ${API_KEY}" -H "Content-Type: application/json" -d "{\"name\":\"interactionScore\"}"
 curl -X POST "http://localhost:8080/scoreScales" -H "X-API-KEY: ${API_KEY}" -H "Content-Type: application/json" -d "{\"name\":\"questionScore\"}"

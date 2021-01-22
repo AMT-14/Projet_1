@@ -15,7 +15,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.annotation.PostConstruct;
-import java.io.IOException;
 
 @ApplicationScoped
 @Named ("ServiceRegistry")
@@ -40,9 +39,9 @@ public class ServiceRegistry{
     private GamificationFacade gamificationFacade;
 
     @PostConstruct
-    public void init() throws IOException {
+    public void init() {
         gamificationFacade = new GamificationFacade();
-        questionFacade = new QuestionFacade(questionRepository, voteRepository);
+        questionFacade = new QuestionFacade(questionRepository, voteRepository, gamificationFacade);
         identityManagementFacade = new IdentityManagementFacade(userRepository);
         voteFacade = new VoteFacade(voteRepository, gamificationFacade);
         answerFacade = new AnswerFacade(answerRepository);

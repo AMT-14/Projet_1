@@ -1,6 +1,9 @@
 package ch.heigvd.amt.ui.web.profile;
 
 import ch.heig.gamification.ApiException;
+import ch.heig.gamification.api.dto.Badge;
+import ch.heig.gamification.api.dto.ScoreScale;
+import ch.heig.gamification.api.dto.UserScore;
 import ch.heig.gamification.api.dto.UserStat;
 import ch.heigvd.amt.application.ServiceRegistry;
 import ch.heigvd.amt.application.gamification.GamificationFacade;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name="ProfilePageHandler", urlPatterns = "/profile")
 public class ProfileEndPoint extends HttpServlet {
@@ -30,27 +34,39 @@ public class ProfileEndPoint extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // ici faire du schmilblick pour get les userStats? attendre de pouvoir lancer l'api (docker-compose working?)
-        // VOIR COMMENT ON GARDE DANS L'APPLI LE USER PSEUDO? UserStat userStats = postEventFacade.getApi().getUser(ACOMPLETER(STRING))
+
         CurrentUserDTO user = (CurrentUserDTO) request.getSession().getAttribute("currentUser");
+        String badgeAttribute = "No badge earned yet";
+        String scoreAttribute = "Scored nothing yet";
         try {
             UserStat userStats = gamificationFacade.getUserStats(user.getId().toString());
-            String badgeAttribute = "No badge earned yet";
-            String scoreAttribute = "Scored nothing yet";
-            if(userStats != null && userStats.getBadges() != null) {
-                badgeAttribute = userStats.getBadges().toString();
-            }
-            if(userStats != null && userStats.getScores() != null){
-               scoreAttribute = userStats.getScores().toString();
-            }
-            System.out.println("******************************* badgeAttribut : " + badgeAttribute);
-            System.out.println("******************************* scoresAttribut : " + scoreAttribute);
-            request.setAttribute("userBadges", badgeAttribute);
-            request.setAttribute("userScores", scoreAttribute);
+            badgeAttribute = formBadges(userStats.getBadges());
+            scoreAttribute = formScores(userStats.getScores());
         } catch (ApiException e) {
-            e.printStackTrace();
+            System.out.println("No user found");
         }
 
+        request.setAttribute("userBadges", badgeAttribute);
+        request.setAttribute("userScores", scoreAttribute);
+
         request.getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(request, response);
+    }
+    private String formBadges(List<Badge> badges) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Badge badge : badges) {
+            stringBuilder.append(badge.getName());
+            stringBuilder.append("<br/>");
+        }
+        return stringBuilder.toString();
+    }
+    private String formScores(List<UserScore> scores) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(UserScore score : scores) {
+            stringBuilder.append(score.getScore().getName());
+            stringBuilder.append(" : ");
+            stringBuilder.append(score.getScoreValue());
+            stringBuilder.append("<br/>");
+        }
+        return stringBuilder.toString();
     }
 }
