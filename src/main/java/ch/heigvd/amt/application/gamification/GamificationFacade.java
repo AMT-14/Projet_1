@@ -55,7 +55,7 @@ public class GamificationFacade {
         //Properties properties = new Properties();
         //properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
         retrieveApiKey();
-        String url = "http://api_gamification:8080/";
+        String url = "http://api:8080/";
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));

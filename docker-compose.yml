@@ -23,6 +23,7 @@ services:
       - '7777:7777'
     links:
       - "database:db"
+      - "api_gamification:api"
 
     depends_on:
       - api_gamification
