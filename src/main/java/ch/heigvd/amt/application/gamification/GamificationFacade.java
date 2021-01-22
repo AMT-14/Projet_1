@@ -59,7 +59,6 @@ public class GamificationFacade {
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        System.out.println("API key : " + this.getApiKey());
         api.getApiClient().addDefaultHeader("X-API-KEY", this.getApiKey());
 
 //        String application_name = properties.getProperty("ch.heig.gamification.app.name");

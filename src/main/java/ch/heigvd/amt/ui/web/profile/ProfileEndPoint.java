@@ -55,7 +55,7 @@ public class ProfileEndPoint extends HttpServlet {
         StringBuilder stringBuilder = new StringBuilder();
         for(Badge badge : badges) {
             stringBuilder.append(badge.getName());
-            stringBuilder.append(System.getProperty("line.separator"));
+            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
@@ -63,9 +63,10 @@ public class ProfileEndPoint extends HttpServlet {
         StringBuilder stringBuilder = new StringBuilder();
         for(UserScore score : scores) {
             stringBuilder.append(score.getScore().getName());
-            stringBuilder.append(System.getProperty("line.separator"));
+            stringBuilder.append("\n");
             stringBuilder.append("\t");
             stringBuilder.append(score.getScoreValue());
+            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
