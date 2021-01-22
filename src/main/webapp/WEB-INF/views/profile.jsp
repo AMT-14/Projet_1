@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean scope="request" id="userStats" type="ch.heig.gamification.api.dto.UserStat"/>
+<jsp:useBean scope="request" id="userScores" type="ch.heig.gamification.api.dto.UserStat"/>
+<jsp:useBean scope="request" id="userBadges" type="ch.heig.gamification.api.dto.UserStat"/>
 
 <c:set var="pageTitle" value="Profile"/>
 
@@ -13,9 +14,9 @@
     <div class="col">
         <table class="table table-warning">
             <thead class="thead-dark">
-                <c:foreach var="userBadge" items="${userStats.badges}">
+                <c:foreach var="badge" items="${userBadges}">
                     <tr>
-                            ${userBadge.name}
+                            ${badge.name}
                     </tr>
                 </c:foreach>
             </thead>
@@ -29,8 +30,8 @@
     <div class="col">
         <table class="table table-warning">
             <thead class="thead-dark">
-                <c:foreach var="userScore" items="${userStats.scores}">
-                    ${userScore.scoreValue}
+                <c:foreach var="score" items="${userScores}">
+                    ${score.scoreValue}
                 </c:foreach>
             </thead>
         </table>
