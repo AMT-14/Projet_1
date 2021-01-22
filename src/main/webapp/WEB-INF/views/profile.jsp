@@ -14,11 +14,7 @@
     <div class="col">
         <table class="table table-warning">
             <thead class="thead-dark">
-                <c:foreach var="badge" items="${userBadges}">
-                    <tr>
-                            ${badge.name}
-                    </tr>
-                </c:foreach>
+                ${userBadges}
             </thead>
         </table>
     </div>
@@ -30,9 +26,7 @@
     <div class="col">
         <table class="table table-warning">
             <thead class="thead-dark">
-                <c:foreach var="score" items="${userScores}">
-                    ${score.scoreValue}
-                </c:foreach>
+                ${userScores}
             </thead>
         </table>
     </div>
