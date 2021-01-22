@@ -43,6 +43,8 @@ public class ProfileEndPoint extends HttpServlet {
             if(userStats.getScores() != null || userStats.getScores().toString() != ""){
                scoreAttribute = userStats.getScores().toString();
             }
+            System.out.println("******************************* badgeAttribut : " + badgeAttribute);
+            System.out.println("******************************* scoresAttribut : " + scoreAttribute);
             request.setAttribute("userBadges", badgeAttribute);
             request.setAttribute("userScores", scoreAttribute);
         } catch (ApiException e) {
