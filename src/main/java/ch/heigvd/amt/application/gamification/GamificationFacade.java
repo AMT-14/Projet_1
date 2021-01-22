@@ -40,7 +40,7 @@ public class GamificationFacade {
 
 
 
-    private void getApiKey() throws IOException {
+    private void retrieveApiKey() throws IOException {
         /*BufferedReader reader = new BufferedReader(new FileReader("api-key.txt"));
         StringBuilder stringBuilder = new StringBuilder();
         String line = null;
@@ -54,6 +54,7 @@ public class GamificationFacade {
     public GamificationFacade() throws IOException {
         //Properties properties = new Properties();
         //properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
+        retrieveApiKey();
         String url = "http://api_gamification:8080/";
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
@@ -74,6 +75,7 @@ public class GamificationFacade {
                 .name(eventType.name)
                 .inGamifiedAppUserId(userId)
                 .properties("propertiesString");
+        api.getApiClient().addDefaultHeader("X-API-KEY", this.getApiKey());
         api.registerEvent(event);
 
     }
