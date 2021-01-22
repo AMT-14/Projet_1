@@ -37,10 +37,10 @@ public class ProfileEndPoint extends HttpServlet {
             UserStat userStats = gamificationFacade.getUserStats(user.getId().toString());
             String badgeAttribute = "No badge earned yet";
             String scoreAttribute = "Scored nothing yet";
-            if(userStats.getBadges() != null) {
+            if(userStats != null && userStats.getBadges() != null) {
                 badgeAttribute = userStats.getBadges().toString();
             }
-            if(userStats.getScores() != null || userStats.getScores().toString() != ""){
+            if(userStats != null && userStats.getScores() != null){
                scoreAttribute = userStats.getScores().toString();
             }
             System.out.println("******************************* badgeAttribut : " + badgeAttribute);
