@@ -55,7 +55,7 @@ public class ProfileEndPoint extends HttpServlet {
         StringBuilder stringBuilder = new StringBuilder();
         for(Badge badge : badges) {
             stringBuilder.append(badge.getName());
-            stringBuilder.append("<\br>");
+            stringBuilder.append("<br/>");
         }
         return stringBuilder.toString();
     }
