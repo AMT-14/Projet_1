@@ -39,9 +39,15 @@ public class GamificationFacade {
     String apiKey;
 
 
-    public GamificationFacade() {
+
+
+    private void retrieveApiKey() throws IOException {
         apiKey = System.getenv("API_KEY");
-        String url = "http://api:8080/";
+    }
+
+    public GamificationFacade() throws IOException {
+        retrieveApiKey();
+        String url = System.getenv("API_URL");
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
