@@ -49,7 +49,7 @@ public class GamificationFacade {
         }
         reader.close();*/
 
-        apiKey = "e02dd210-3638-41dc-9682-2c4dce37e84f";//System.getProperty("API_KEY");//stringBuilder.toString();
+        apiKey = System.getenv("API_KEY");//stringBuilder.toString();
     }
     public GamificationFacade() throws IOException {
         //Properties properties = new Properties();
