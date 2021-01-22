@@ -60,7 +60,8 @@ public class VoteFacade {
                 gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_FIRST_DOWN_VOTE, null);
             }
         } catch (ApiException e) {
-            System.out.println("Unable to post neither up vote nor down vote to the gamification api :\n" + e.getMessage());
+            System.out.println("Unable to post neither up vote nor down vote to the gamification api :\n");
+            e.printStackTrace();
         }
         repository.save(vote);
     }
