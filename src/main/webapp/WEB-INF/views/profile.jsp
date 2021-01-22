@@ -10,21 +10,31 @@
     <h2>
         Badges
     </h2>
-    <tr>
-    <c:foreach var="userBadge" items="${userStats.badges}">
-        <tr>
-                ${userBadge.name}
-        </tr>
-    </c:foreach>
-    </tr>
+    <div class="col">
+        <table class="table table-warning">
+            <thead class="thead-dark">
+                <c:foreach var="userBadge" items="${userStats.badges}">
+                    <tr>
+                            ${userBadge.name}
+                    </tr>
+                </c:foreach>
+            </thead>
+        </table>
+    </div>
 </div>
 <div>
     <h2>
         score
     </h2>
-    <c:foreach var="userScore" items="${userStats.scores}">
-        ${userScore.name}
-    </c:foreach>
+    <div class="col">
+        <table class="table table-warning">
+            <thead class="thead-dark">
+                <c:foreach var="userScore" items="${userStats.scores}">
+                    ${userScore.scoreValue}
+                </c:foreach>
+            </thead>
+        </table>
+    </div>
 </div>
 
 <jsp:include page="parts/footer.jsp"/>
