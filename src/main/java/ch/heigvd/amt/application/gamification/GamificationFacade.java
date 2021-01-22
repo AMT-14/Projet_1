@@ -74,9 +74,8 @@ public class GamificationFacade {
         Event event = new Event()
                 .name(eventType.name)
                 .inGamifiedAppUserId(userId)
-                //.creationDateTime(Date.from(Instant.now()))
                 .properties("propertiesString");
-        api.registerEventAsync(event, callback);
+        api.registerEvent(event);
 
     }
 

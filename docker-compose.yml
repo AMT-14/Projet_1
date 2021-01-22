@@ -28,7 +28,7 @@ services:
       - api_gamification
       - database
     environment:
-      API_KEY: 'e02dd210-3638-41dc-9682-2c4dce37e84f'
+      API_KEY: '0b246dd9-efb8-415d-8d68-967e1f31a256'
       MYSQL_HOST: 'database'
       MYSQL_DATABASE: 'DBProjet1'
       MYSQL_USER: 'U'
@@ -40,7 +40,7 @@ services:
     container_name: db_gamification
     restart: always
     environment:
-      MYSQL_USER: 'APIUser'
+      MYSQL_USE'*'R: 'APIUser'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
       MYSQL_DATABASE: 'DBProjet2'
