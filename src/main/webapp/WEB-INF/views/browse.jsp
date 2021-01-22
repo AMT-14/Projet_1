@@ -18,19 +18,22 @@
                     <div class="question text-black-50">${question.text}</div>
                     <div class="col">
                         <form action="vote.do" method="post">
-                            <input type="hidden" name="questionID" value="${questionID}">
-                            <input type="hidden" name="objectVoted" value="${questionID}">
+                            <input type="hidden" name="questionID" value="${question.id}">
                             <input type="hidden" name="textType" value="${TextType.QUESTION}">
+                            <input type="hidden" name="objectVotedType" value="question">
+                            <input type="hidden" name="voteID" value="">
                             <input type="hidden" name="value" value="UP">
-                            <button type="submit"><i class="fas fa-arrow-up"></i></button>
+                            <button type="submit">arrow up</button>
                         </form>
-                        <!-- <span>${question.totalVotes}</span> -->
+
+                        <span>${question.getTotalVotes()}</span>
                         <form action="vote.do" method="post">
-                            <input type="hidden" name="questionID" value="${questionID}">
-                            <input type="hidden" name="objectVoted" value="${questionID}">
+                            <input type="hidden" name="questionID" value="${question.id}">
                             <input type="hidden" name="textType" value="${TextType.QUESTION}">
+                            <input type="hidden" name="objectVotedType" value="question">
+                            <input type="hidden" name="voteID" value="">
                             <input type="hidden" name="value" value="DOWN">
-                            <button type="submit"><i class="fas fa-arrow-down"></i></button>
+                            <button type="submit">arrow down</button>
                         </form>
                     </div>
                 </td>
