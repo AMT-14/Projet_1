@@ -35,8 +35,8 @@ public class ProfileEndPoint extends HttpServlet {
         CurrentUserDTO user = (CurrentUserDTO) request.getSession().getAttribute("currentUser");
         try {
             UserStat userStats = gamificationFacade.getUserStats(user.getId().toString());
-            String badgeAttribute = "";
-            String scoreAttribute = "";
+            String badgeAttribute = "No badge earned yet";
+            String scoreAttribute = "Scored nothing yet";
             if(userStats.getBadges() != null) {
                 badgeAttribute = userStats.getBadges().toString();
             }
