@@ -1,6 +1,8 @@
 version: '3.3'
 services:
+
   database:
+    container_name: application_db
     image: mysql:8.0.21
     restart: always
     environment:
@@ -13,17 +15,18 @@ services:
         - ./docker/images/mysql/schema/init.sql:/data/application/init.sql
     ports:
       - '3306:3306'
-      - '33060:33060'
     expose:
       - '3306'
-  app:
+
+  application:
+    restart: always
+    container_name: application
     image: ghcr.io/amt-14/test_amt_team_14:latest
     ports:
       - '9080:9080'
       - '7777:7777'
     links:
       - "database:db"
-
     depends_on:
       - api
       - database
@@ -33,12 +36,13 @@ services:
       MYSQL_USER: 'U'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
+      API_URL: 'http://api:8080/'
     env_file:
       - app.env
 
   database_gamification:
     image: mysql:8.0.21
-    container_name: db_gamification
+    container_name: gamification_db
     restart: always
     environment:
       MYSQL_USER: 'APIUser'
@@ -49,7 +53,8 @@ services:
       - '3305:3306'
 
   api:
-    container_name: api
+    restart: always
+    container_name: gamification_api
     image: ghcr.io/amt-14/gamificationapi_image:latest
     ports:
       - '8080:8080'

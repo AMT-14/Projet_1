@@ -41,21 +41,12 @@ public class GamificationFacade {
 
 
     private void retrieveApiKey() throws IOException {
-        /*BufferedReader reader = new BufferedReader(new FileReader("api-key.txt"));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        reader.close();*/
-
-        apiKey = System.getenv("API_KEY");//stringBuilder.toString();
+        apiKey = System.getenv("API_KEY");
     }
+
     public GamificationFacade() throws IOException {
-        //Properties properties = new Properties();
-        //properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
         retrieveApiKey();
-        String url = "http://api:8080/";
+        String url = System.getenv("API_URL");
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
