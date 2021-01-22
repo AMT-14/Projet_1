@@ -16,7 +16,7 @@ import java.util.TimeZone;
 
 public class GamificationFacade {
 
-    private DefaultApi api;
+    private DefaultApi api = new DefaultApi();
 
     @Getter
     @Setter
@@ -52,10 +52,9 @@ public class GamificationFacade {
         apiKey = System.getProperty("API_KEY");//stringBuilder.toString();
     }
     public GamificationFacade() throws IOException {
-        getApiKey();
-        Properties properties = new Properties();
+        //Properties properties = new Properties();
         //properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
-        String url = properties.getProperty("ch.heig.gamification.server.url");
+        String url = "ch.heig.gamification.server.url"
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
