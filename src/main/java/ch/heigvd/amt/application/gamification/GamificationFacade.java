@@ -85,6 +85,10 @@ public class GamificationFacade {
         }
     }
 
+    public UserStat getUserStats(String userId) throws ApiException {
+        return api.getUser(userId);
+    }
+
     public DefaultApi getApi() {
         return api;
     }
