@@ -55,9 +55,9 @@ public class VoteFacade {
                 .build();
         try {
             if (vote.getValue() == Vote.VoteValue.UP) {
-                gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_FIRST_UP_VOTE, null);
+                gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_UP_VOTE, null);
             } else {
-                gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_FIRST_DOWN_VOTE, null);
+                gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_DOWN_VOTE, null);
             }
         } catch (ApiException e) {
             System.out.println("Unable to post neither up vote nor down vote to the gamification api :\n");
