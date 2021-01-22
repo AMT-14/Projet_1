@@ -10,17 +10,12 @@
     <h2>
         Badges
     </h2>
-    <c:foreach var="userBadge" items="${userStats.badges}">
-        ${userBadge.name}
-    </c:foreach>
+    ${userStats.badges.get(0)}
 </div>
 <div>
     <h2>
         score
     </h2>
-    <c:foreach var="userScore" items="${userStats.scores}">
-        ${userBadge.name}
-    </c:foreach>
 </div>
 
 <jsp:include page="parts/footer.jsp"/>
