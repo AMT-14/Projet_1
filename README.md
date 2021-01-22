@@ -1,3 +1,54 @@
+# Projet_3 implementation project 2 -> project 1
+
+#### Running the application
+Inside the project folder, make sure you are up do date by typing :
+```
+docker-compose pull
+```
+
+Launch the dbs by typing :
+```
+docker-compose up database database_gamification
+```
+database is the database for the main application
+database_gamification is the database for the gamified app
+
+Launch now the gamified app :
+```
+docker-compose up api
+```
+
+If you already made this step skip to the next one.
+Register the application and create badges, score scales and rules by executing the script appRegistration.sh
+```
+./appRegistration.sh
+```
+
+Launch the main application :
+```
+docker-compose up application
+```
+
+You can now acces the application on :
+```
+http://localhost:9080/
+```
+And the gamified swagger-ui on :
+```
+http://localhost:8080/
+```
+
+#### Elements changed in project_1
+- votes are now working, we let the user up vote or down vote many times a question.
+- added a profile page to display the badges and scores of a user.
+
+#### Features given by the implementation of project_2
+- a user earns a badge for the first question he posts.
+- each question asked increases the question score of the user asking the question.
+- a user earns a badge when he first up votes.
+- a user earny a badge when he first down votes.
+- each vote increases the interaction score of the user voting.
+
 # Projet_1
 
 #### Running the App
@@ -5,18 +56,6 @@
 Inside the project folder, make sure you are up to date, then you can type
 ```
 docker-compose pull
-docker-compose up
-```
-
-to get the app running, then you simply go to the following URL : localhost:9080/
-
-#### Running the GAMIFIED App
-
-Inside the project folder, make sure you are up to date, then you can type
-```
-docker-compose pull
-docker-compose up -d database_gamification database
-# wait a bit
 docker-compose up
 ```
 
