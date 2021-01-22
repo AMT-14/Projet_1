@@ -30,7 +30,7 @@ public class QuestionFacade{
                 .questionType(command.getType())
                 .build();
         try {
-            gamificationFacade.PostEvent(command.getId().toString(), EventType.EVENT_QUESTION, null);
+            gamificationFacade.PostEvent(command.getAuthorId().toString(), EventType.EVENT_QUESTION, null);
         } catch (ApiException e) {
             System.out.println("unable to post question event to the gamification api");
         }
