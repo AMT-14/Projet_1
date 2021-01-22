@@ -29,13 +29,13 @@ public class QuestionFacade{
                 .text(command.getText())
                 .questionType(command.getType())
                 .build();
-        questionRepository.save(submittedQuestion);
         try {
             gamificationFacade.PostEvent(command.getId().toString(), EventType.EVENT_QUESTION, null);
         } catch (ApiException e) {
             System.out.println("unable to post question event to the gamification api");
         }
-        // TODO HERE call postEvent
+
+        questionRepository.save(submittedQuestion);
     }
 
     public QuestionsDTO getQuestions(QuestionsQuery query){
