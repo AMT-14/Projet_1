@@ -40,7 +40,7 @@ public class ProfileEndPoint extends HttpServlet {
             if(userStats.getBadges() != null) {
                 badgeAttribute = userStats.getBadges().toString();
             }
-            if(userStats.getScores() != null) {
+            if(userStats.getScores() != null || userStats.getScores().toString() != ""){
                scoreAttribute = userStats.getScores().toString();
             }
             request.setAttribute("userBadges", badgeAttribute);
