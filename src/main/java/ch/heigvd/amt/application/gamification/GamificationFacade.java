@@ -59,6 +59,7 @@ public class GamificationFacade {
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        api.getApiClient().addDefaultHeader("X-API-KEY", this.getApiKey());
 
 //        String application_name = properties.getProperty("ch.heig.gamification.app.name");
 //        try{
@@ -75,13 +76,36 @@ public class GamificationFacade {
                 .name(eventType.name)
                 .inGamifiedAppUserId(userId)
                 .properties("propertiesString");
-        api.getApiClient().addDefaultHeader("X-API-KEY", this.getApiKey());
-        api.registerEvent(event);
-
+        try {
+            ApiResponse response = api.registerEventWithHttpInfo(event);
+            apiResponseProcessor(response);
+        } catch (ApiException e) {
+            apiExceptionProcessor(e);
+        }
     }
 
     public DefaultApi getApi() {
         return api;
+    }
+    public void apiExceptionProcessor(ApiException e){
+        isException = true;
+        apiException = e;
+        httpStatus = e.getCode();
+
+        // response should be removed in case of exception
+        apiResponse = null;
+    }
+
+    public void apiResponseProcessor(ApiResponse r){
+        apiResponse = r;
+        httpStatus = r.getStatusCode();
+        if(r.getData() != null) {
+            apiKey = r.getData().toString();
+        }
+
+        // exception should be negated in this case
+        isException = false;
+        apiException = null;
     }
 
 }
