@@ -43,7 +43,7 @@ public class ProfileEndPoint extends HttpServlet {
             badgeAttribute = formBadges(userStats.getBadges());
             scoreAttribute = formScores(userStats.getScores());
         } catch (ApiException e) {
-            System.out.println("No user found");
+            System.out.println("User was not found in gamification api");
         }
 
         request.setAttribute("userBadges", badgeAttribute);
