@@ -39,39 +39,17 @@ public class GamificationFacade {
     String apiKey;
 
 
-
-    private void retrieveApiKey() throws IOException {
-        /*BufferedReader reader = new BufferedReader(new FileReader("api-key.txt"));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        reader.close();*/
-
-        apiKey = System.getenv("API_KEY");//stringBuilder.toString();
-    }
-    public GamificationFacade() throws IOException {
-        //Properties properties = new Properties();
-        //properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
-        retrieveApiKey();
+    public GamificationFacade() {
+        apiKey = System.getenv("API_KEY");
         String url = "http://api:8080/";
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         api.getApiClient().addDefaultHeader("X-API-KEY", this.getApiKey());
 
-//        String application_name = properties.getProperty("ch.heig.gamification.app.name");
-//        try{
-//            api.getApiClient().setApiKey(api.getApplication(application_name).getApiKey());
-//        } catch (ApiException e){
-//            e.printStackTrace();
-//        }
-
     }
 
     public void PostEvent(String userId, EventType eventType, ApiCallback<Void> callback) throws ApiException{
-//        Event event = new Event(, userId, "propertiesString");
         Event event = new Event()
                 .name(eventType.name)
                 .inGamifiedAppUserId(userId)

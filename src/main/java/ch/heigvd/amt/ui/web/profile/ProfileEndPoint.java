@@ -63,8 +63,7 @@ public class ProfileEndPoint extends HttpServlet {
         StringBuilder stringBuilder = new StringBuilder();
         for(UserScore score : scores) {
             stringBuilder.append(score.getScore().getName());
-            stringBuilder.append("<br/>");
-            stringBuilder.append("&emsp;");
+            stringBuilder.append(" : ");
             stringBuilder.append(score.getScoreValue());
             stringBuilder.append("<br/>");
         }

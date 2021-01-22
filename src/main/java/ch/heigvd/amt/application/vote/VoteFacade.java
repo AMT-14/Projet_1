@@ -11,8 +11,6 @@ import ch.heigvd.amt.domain.vote.IVoteRepository;
 import ch.heigvd.amt.domain.vote.Vote;
 import ch.heigvd.amt.domain.vote.VoteId;
 
-import java.io.Console;
-import java.io.IOException;
 import java.util.Optional;
 
 public class VoteFacade {
@@ -60,7 +58,7 @@ public class VoteFacade {
                 gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_DOWN_VOTE, null);
             }
         } catch (ApiException e) {
-            System.out.println("Unable to post neither up vote nor down vote to the gamification api :\n");
+            System.out.println("Unable to post neither up vote nor down vote event to the gamification api :\n");
             e.printStackTrace();
         }
         repository.save(vote);

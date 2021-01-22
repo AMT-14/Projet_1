@@ -21,7 +21,7 @@
 </div>
 <div>
     <h2>
-        score
+        Score
     </h2>
     <div class="col">
         <table class="table table-warning">
