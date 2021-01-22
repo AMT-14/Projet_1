@@ -51,15 +51,11 @@ public class VoteFacade {
                 .objectVoted(command.getObjectVoted())
                 .value(command.getValue())
                 .build();
-        try {
-            if (vote.getValue() == Vote.VoteValue.UP) {
-                gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_UP_VOTE, null);
-            } else {
-                gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_DOWN_VOTE, null);
-            }
-        } catch (ApiException e) {
-            System.out.println("Unable to post neither up vote nor down vote event to the gamification api :\n");
-            e.printStackTrace();
+        
+        if (vote.getValue() == Vote.VoteValue.UP) {
+            gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_UP_VOTE, null);
+        } else {
+            gamificationFacade.PostEvent(command.getVoter().toString(), EventType.EVENT_DOWN_VOTE, null);
         }
         repository.save(vote);
     }

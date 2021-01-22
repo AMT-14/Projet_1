@@ -29,12 +29,8 @@ public class QuestionFacade{
                 .text(command.getText())
                 .questionType(command.getType())
                 .build();
-        try {
-            gamificationFacade.PostEvent(command.getAuthorId().toString(), EventType.EVENT_QUESTION, null);
-        } catch (ApiException e) {
-            System.out.println("unable to post question event to the gamification api");
-        }
 
+        gamificationFacade.PostEvent(command.getAuthorId().toString(), EventType.EVENT_QUESTION, null);
         questionRepository.save(submittedQuestion);
     }
 

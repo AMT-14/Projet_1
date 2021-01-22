@@ -38,15 +38,8 @@ public class GamificationFacade {
     @Setter
     String apiKey;
 
-
-
-
-    private void retrieveApiKey() throws IOException {
+    public GamificationFacade() {
         apiKey = System.getenv("API_KEY");
-    }
-
-    public GamificationFacade() throws IOException {
-        retrieveApiKey();
         String url = System.getenv("API_URL");
         api = new DefaultApi();
         api.getApiClient().setBasePath(url);
@@ -55,7 +48,7 @@ public class GamificationFacade {
 
     }
 
-    public void PostEvent(String userId, EventType eventType, ApiCallback<Void> callback) throws ApiException{
+    public void PostEvent(String userId, EventType eventType, ApiCallback<Void> callback) {
         Event event = new Event()
                 .name(eventType.name)
                 .inGamifiedAppUserId(userId)
