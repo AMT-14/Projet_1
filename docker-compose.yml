@@ -23,10 +23,9 @@ services:
       - '7777:7777'
     links:
       - "database:db"
-      - "api_gamification:api"
 
     depends_on:
-      - api_gamification
+      - api
       - database
     environment:
       API_KEY: 'e02dd210-3638-41dc-9682-2c4dce37e84f'
@@ -48,8 +47,8 @@ services:
     ports:
       - '3305:3306'
 
-  api_gamification:
-    container_name: api_gamification
+  api:
+    container_name: api
     image: ghcr.io/amt-14/gamificationapi_image:latest
     ports:
       - '8080:8080'
